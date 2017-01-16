@@ -1,0 +1,12 @@
+[TApplication.Form1]
+Form1_Left=303
+Form1_Top=117
+Edit1_Text=10.164.113.50
+PageControl1_ActivePage=TabSheet6
+plImageButton1_Tag=1
+TrackBar1_Position=1
+DirectoryEdit1_Text=/home/aevl/projects/slimline/Data
+
+[LoginForm]
+LoginForm_Left=675
+LoginForm_Top=324

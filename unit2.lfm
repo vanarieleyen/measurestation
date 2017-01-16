@@ -1,0 +1,47 @@
+object DataModule1: TDataModule1
+  OnDestroy = DataModuleDestroy
+  OldCreateOrder = False
+  Height = 521
+  HorizontalOffset = 340
+  VerticalOffset = 141
+  Width = 415
+  object MySQL56Connection1: TMySQL56Connection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = 'gwc_slimline'
+    KeepConnection = False
+    Params.Strings = (
+      'Port=3306'
+    )
+    Password = 'z0nnew1nde'
+    Transaction = SQLTransaction1
+    UserName = 'root'
+    CharSet = 'utf8'
+    HostName = '10.164.113.50'
+    Options = []
+    SkipLibraryVersionCheck = False
+    left = 83
+    top = 32
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = False
+    Database = MySQL56Connection1
+    Options = []
+    left = 83
+    top = 112
+  end
+  object SQLQuery1: TSQLQuery
+    FieldDefs = <>
+    Database = MySQL56Connection1
+    Transaction = SQLTransaction1
+    Options = []
+    Params = <>
+    left = 83
+    top = 200
+  end
+  object DataSource1: TDataSource
+    DataSet = SQLQuery1
+    left = 87
+    top = 288
+  end
+end
