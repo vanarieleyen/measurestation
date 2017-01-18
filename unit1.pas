@@ -9,7 +9,7 @@ uses
   TplColorPanelUnit, TplImageButtonUnit, cySkinArea, db, dbf, sqldb, Forms,
   Controls, Graphics, Dialogs, ComCtrls, IniPropStorage, StdCtrls, EditBtn,
   ExtCtrls, Buttons, Grids, PopupNotifier, ExtDlgs, DBGrids, DbCtrls, Types, Math,
-  LazLogger;
+  LazLogger, dblo, dbhi;
 
 type
 
@@ -145,7 +145,6 @@ type
     Dbf2WGSD: TFloatField;
     Dbf2YPBH: TStringField;
     Dbf3: TDbf;
-    DBGrid1: TDBGrid;
     DirectoryEdit1: TDirectoryEdit;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -160,6 +159,8 @@ type
     PageControl1: TPageControl;
     StatusBar1: TStatusBar;
     StringGrid1: TStringGrid;
+    StringGrid2: TStringGrid;
+    StringGrid3: TStringGrid;
     TabSheet1: TTabSheet;
     TabSheet6: TTabSheet;
     Timer1: TTimer;
@@ -169,15 +170,12 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure DBGrid1MouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure DBGrid1MouseWheel(Sender: TObject; Shift: TShiftState;
-      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure DirectoryEdit1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormWindowStateChange(Sender: TObject);
-    procedure IniPropStorage1RestoreProperties(Sender: TObject);
+    procedure StringGrid3MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure Timer1Timer(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
@@ -189,7 +187,7 @@ type
   public
     { public declarations }
     procedure ClearStringGrid(const Grid: TStringGrid);
-    procedure UpdateGrid(Sender: TObject);
+    procedure UpdateGrid(Sender: TObject; YPBH: string);
     function ConvertDate(s: TDateTime): string;
     function GetNr(txt: string): string;
     function GetShift(tijd: string): string;
@@ -206,6 +204,9 @@ var
    LastSize: int64;
    Finished: boolean;
 	teller: integer;		// used to break from the loop when there are too many inserts
+   cfg: TDBFdatabase;       	// specs
+   ctdata1: TDBFdatabase;		// measurements master
+   ctdata2: TDBFdatabase;		// measurements details
 
 implementation
 
@@ -223,6 +224,15 @@ begin
    LastSize := 0;
    Finished := false;
    teller := 0;
+
+   // open the dbase tables (reads all data in memory and closes the files on hd)
+	cfg := TDBFdatabase.Create;
+   ctdata1 := TDBFdatabase.Create;
+   ctdata2 := TDBFdatabase.Create;
+
+   cfg.Open(DirectoryEdit1.Text+PathDelim+'Cfg.DBF');
+   ctdata1.Open(DirectoryEdit1.Text+PathDelim+'CtData1.DBF');
+   ctdata2.Open(DirectoryEdit1.Text+PathDelim+'CtData2.DBF');
 end;
 
 // save the settings
@@ -280,49 +290,64 @@ begin
 end;
 
 // show details from the measurement
-procedure TForm1.UpdateGrid(Sender: TObject);
+procedure TForm1.UpdateGrid(Sender: TObject; YPBH: string);
 var
-   i: integer;
+   i, r: integer;
 begin
-   DebugLn(dbgs(DataSource2.Dataset.FieldByName('PH'))  );
 	ClearStringGrid(StringGrid1);
-	with Dbf3 do begin
-		if Active then begin
-         First;
-			while not Eof do begin
-				if DataSource3.Dataset.FieldByName('YPBH').AsString = DataSource2.Dataset.FieldByName('YPBH').AsString then begin
-					with StringGrid1 do begin
-						RowCount := RowCount+1;
-						Cells[0, RowCount-1]:= DataSource3.Dataset.FieldByName('YPBH').AsString;
-						Cells[1, RowCount-1]:= DataSource3.Dataset.FieldByName('NO').AsString;
-						Cells[2, RowCount-1]:= DataSource3.Dataset.FieldByName('WG').AsString;
-						Cells[3, RowCount-1]:= DataSource3.Dataset.FieldByName('CIR').AsString;
-						Cells[4, RowCount-1]:= DataSource3.Dataset.FieldByName('LEN').AsString;
-						Cells[5, RowCount-1]:= DataSource3.Dataset.FieldByName('PDO').AsString;
-						Cells[6, RowCount-1]:= DataSource3.Dataset.FieldByName('V').AsString;
-						Cells[7, RowCount-1]:= DataSource3.Dataset.FieldByName('HD').AsString;
-					end;
-				end;
-				Next;
-			end;
-      end;
-   end;
-end;
 
-// update the detail-grid when you click the parent grid
-procedure TForm1.DBGrid1MouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  UpdateGrid(Sender);
+   StringGrid1.RowCount := 1;
+   StringGrid1.ColCount := ctdata2.numfields+1;
+   for i := 0 to ctdata2.NumFields-1 do
+      StringGrid1.Cells[i, 0] := ctdata2.fielddev[i].name;
+
+   r := 1;
+   WHILE r <= ctdata2.NumRecs DO BEGIN
+      if ctdata2.GetField('YPBH', r) = YPBH then begin
+      	StringGrid1.RowCount := StringGrid1.RowCount+1;
+         FOR i := 0 TO ctdata2.NumFields-1 DO
+				StringGrid1.Cells[i, StringGrid1.RowCount-1] := ctdata2.GetFieldNr(i, r);
+      end;
+		r := r+1;
+   END;
+   DebugLn(inttostr(StringGrid1.RowCount));
 end;
 
 // temporarily disable updates (10min) to browse through the data
 procedure TForm1.Button1Click(Sender: TObject);
+var
+   i, r: integer;
 begin
-   Dbf3.Open;								// open the tables on the measuring station (get the latest data)
-   Dbf2.Open;
-   Dbf1.Open;
-	UpdateGrid(Sender);
+  // display specs
+  StringGrid2.ColCount := cfg.NumFields;
+  StringGrid2.RowCount := cfg.NumRecs+1;
+  for i := 0 to cfg.NumFields-1 do
+     StringGrid2.Cells[i, 0] := cfg.fielddev[i].name;
+  r := 1;
+  WHILE r <= cfg.NumRecs DO BEGIN
+     FOR i := 0 TO cfg.NumFields-1 DO
+      	StringGrid2.Cells[i,r] := cfg.GetFieldNr(i, r);
+     r := r+1;
+  END;
+
+  // display measurements master
+  StringGrid3.ColCount := ctdata1.NumFields;
+  StringGrid3.RowCount := ctdata1.NumRecs+1;
+  for i := 0 to ctdata1.NumFields-1 do
+     StringGrid3.Cells[i, 0] := ctdata1.fielddev[i].name;
+  r := 1;
+  WHILE r <= ctdata1.NumRecs DO BEGIN
+     FOR i := 0 TO ctdata1.NumFields-1 DO
+      	StringGrid3.Cells[i,r] := ctdata1.GetFieldNr(i, r);
+     r := r+1;
+  END;
+
+  	for i := 0 to ctdata1.numfields-1 do      // get field number for YPBH
+      if ctdata1.fielddev[i].name = 'YPBH' then break;
+
+   // diplay details
+	UpdateGrid(Sender, StringGrid3.Cells[i, 1]);
+
    Timer1.Enabled := false;
 end;
 
@@ -460,28 +485,17 @@ begin
 
 end;
 
-// update the details when you browse through the master data
-procedure TForm1.DBGrid1MouseWheel(Sender: TObject; Shift: TShiftState;
-  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
-begin
-  UpdateGrid(Sender);
-end;
-
 // set the database location for the dbase tables
 procedure TForm1.DirectoryEdit1Change(Sender: TObject);
 var
    pad: string;
 begin
 	pad := DirectoryEdit1.Text;
-   Dbf3.Close;								// make sure the tables are closed
-   Dbf2.Close;
-   Dbf1.Close;
-	Dbf1.FilePath := pad;
-  	Dbf2.FilePath := pad;
-  	Dbf3.FilePath := pad;
-	Dbf1.FilePathFull := pad;
-  	Dbf2.FilePathFull := pad;
-  	Dbf3.FilePathFull := pad;
+
+   // open the dbase tables
+   //cfg.Open(DirectoryEdit1.Text);
+   //ctdata1.Open(pad);
+   //ctdata2.Open(pad);
 end;
 
 procedure TForm1.FormWindowStateChange(Sender: TObject);
@@ -492,9 +506,15 @@ begin
    end;
 end;
 
-procedure TForm1.IniPropStorage1RestoreProperties(Sender: TObject);
+// update the detail-grid
+procedure TForm1.StringGrid3MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var
+   i: integer;
 begin
-
+  	for i := 0 to ctdata1.numfields-1 do
+      if ctdata1.fielddev[i].name = 'YPBH' then
+         break;
+	UpdateGrid(Sender, StringGrid3.Cells[i, StringGrid3.Row]);
 end;
 
 // the main program loop

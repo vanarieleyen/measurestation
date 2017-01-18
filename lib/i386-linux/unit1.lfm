@@ -30,9 +30,9 @@ object Form1: TForm1
       ClientHeight = 522
       ClientWidth = 897
       object StringGrid1: TStringGrid
-        Left = 16
+        Left = -2
         Height = 248
-        Top = 264
+        Top = 328
         Width = 592
         ColCount = 8
         FixedCols = 0
@@ -47,45 +47,6 @@ object Form1: TForm1
           64
           64
         )
-        Cells = (
-          8
-          0
-          0
-          'YPBH'
-          1
-          0
-          'NO'
-          2
-          0
-          'Weight'
-          3
-          0
-          'Circum'
-          4
-          0
-          'Length'
-          5
-          0
-          'PD'
-          6
-          0
-          'Vent'
-          7
-          0
-          'Hard'
-        )
-      end
-      object DBGrid1: TDBGrid
-        Left = 16
-        Height = 248
-        Top = 8
-        Width = 872
-        Color = clWindow
-        Columns = <>
-        DataSource = DataSource2
-        TabOrder = 1
-        OnMouseUp = DBGrid1MouseUp
-        OnMouseWheel = DBGrid1MouseWheel
       end
       object Button1: TButton
         Left = 632
@@ -95,7 +56,7 @@ object Form1: TForm1
         AutoSize = True
         Caption = 'Browse Data on Station (10min)'
         OnClick = Button1Click
-        TabOrder = 2
+        TabOrder = 1
       end
       object Button2: TButton
         Left = 632
@@ -105,7 +66,7 @@ object Form1: TForm1
         AutoSize = True
         Caption = 'Export Labratory Specs to Server'
         OnClick = Button2Click
-        TabOrder = 3
+        TabOrder = 2
         Visible = False
       end
       object Button3: TButton
@@ -116,8 +77,29 @@ object Form1: TForm1
         AutoSize = True
         Caption = 'Export Workfloor Specs to Server'
         OnClick = Button3Click
-        TabOrder = 4
+        TabOrder = 3
         Visible = False
+      end
+      object StringGrid2: TStringGrid
+        Left = 0
+        Height = 140
+        Top = 0
+        Width = 899
+        AutoEdit = False
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goSmoothScroll]
+        TabOrder = 4
+      end
+      object StringGrid3: TStringGrid
+        Left = -2
+        Height = 168
+        Top = 152
+        Width = 896
+        AutoEdit = False
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goSmoothScroll]
+        TabOrder = 5
+        OnMouseUp = StringGrid3MouseUp
       end
     end
     object TabSheet6: TTabSheet
@@ -241,13 +223,13 @@ object Form1: TForm1
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
     IniFileName = 'config.ini'
-    OnRestoreProperties = IniPropStorage1RestoreProperties
     left = 800
     top = 60
   end
   object DataSource1: TDataSource
     AutoEdit = False
     DataSet = Dbf1
+    Enabled = False
     left = 616
     top = 152
   end
@@ -658,6 +640,7 @@ object Form1: TForm1
   object DataSource3: TDataSource
     AutoEdit = False
     DataSet = Dbf3
+    Enabled = False
     left = 836
     top = 152
   end
