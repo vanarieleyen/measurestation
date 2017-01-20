@@ -5,7 +5,7 @@ unit dblo;
 interface
 
 uses
-  Classes, SysUtils, dos, LazLogger;
+  Classes, SysUtils, dos, LazLoggerDummy;
 
 (******************************************************************************
  dBASE DBF file access via Turbo Pascal

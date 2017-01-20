@@ -5,11 +5,10 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, LSControls, LSGrids, RxMDI, KGrids, JvXPBar, DateUtils,
-  TplColorPanelUnit, TplImageButtonUnit, cySkinArea, db, dbf, sqldb, Forms,
-  Controls, Graphics, Dialogs, ComCtrls, IniPropStorage, StdCtrls, EditBtn,
-  ExtCtrls, Buttons, Grids, PopupNotifier, ExtDlgs, DBGrids, DbCtrls, Types, Math,
-  LazLogger, dblo, dbhi;
+  Classes, SysUtils, FileUtil, DateUtils, sqldb, Forms,
+  Controls, Dialogs, ComCtrls, IniPropStorage, StdCtrls, EditBtn,
+  ExtCtrls, Buttons, Grids, PopupNotifier, ExtDlgs, Types, Math,
+  LazLoggerDummy, dblo, dbhi;
 
 type
 
@@ -19,132 +18,6 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    DataSource1: TDataSource;
-    DataSource2: TDataSource;
-    DataSource3: TDataSource;
-    Dbf1: TDbf;
-    Dbf1CIRHI: TFloatField;
-    Dbf1CIRLO: TFloatField;
-    Dbf1CIRSTD: TFloatField;
-    Dbf1FVHI: TFloatField;
-    Dbf1FVLO: TFloatField;
-    Dbf1FVSTD: TFloatField;
-    Dbf1HDHI: TFloatField;
-    Dbf1HDLO: TFloatField;
-    Dbf1HDSTD: TFloatField;
-    Dbf1ITEMS: TLongintField;
-    Dbf1LENHI: TFloatField;
-    Dbf1LENLO: TFloatField;
-    Dbf1LENSTD: TFloatField;
-    Dbf1OVALHI: TFloatField;
-    Dbf1OVALLO: TFloatField;
-    Dbf1OVALSTD: TFloatField;
-    Dbf1PDCHI: TLongintField;
-    Dbf1PDCLO: TLongintField;
-    Dbf1PDCSTD: TLongintField;
-    Dbf1PDOHI: TLongintField;
-    Dbf1PDOLO: TLongintField;
-    Dbf1PDOMMWGHI: TLongintField;
-    Dbf1PDOMMWGLO: TLongintField;
-    Dbf1PDOMMWGSTD: TLongintField;
-    Dbf1PDOSTD: TLongintField;
-    Dbf1PH: TStringField;
-    Dbf1PVHI: TFloatField;
-    Dbf1PVLO: TFloatField;
-    Dbf1PVSTD: TFloatField;
-    Dbf1VHI: TFloatField;
-    Dbf1VLO: TFloatField;
-    Dbf1VSTD: TFloatField;
-    Dbf1WGHI: TFloatField;
-    Dbf1WGLO: TFloatField;
-    Dbf1WGSTD: TFloatField;
-    Dbf2: TDbf;
-    Dbf2BC: TStringField;
-    Dbf2CIRBAD: TLongintField;
-    Dbf2CIRCPK: TFloatField;
-    Dbf2CIRCV: TFloatField;
-    Dbf2CIRMAX: TFloatField;
-    Dbf2CIRMEAN: TFloatField;
-    Dbf2CIRMIN: TFloatField;
-    Dbf2CIRSD: TFloatField;
-    Dbf2DATE: TDateField;
-    Dbf2FVBAD: TLongintField;
-    Dbf2FVCPK: TFloatField;
-    Dbf2FVCV: TFloatField;
-    Dbf2FVMAX: TFloatField;
-    Dbf2FVMEAN: TFloatField;
-    Dbf2FVMIN: TFloatField;
-    Dbf2FVSD: TFloatField;
-    Dbf2HDBAD: TLongintField;
-    Dbf2HDCPK: TFloatField;
-    Dbf2HDCV: TFloatField;
-    Dbf2HDMAX: TFloatField;
-    Dbf2HDMEAN: TFloatField;
-    Dbf2HDMIN: TFloatField;
-    Dbf2HDSD: TFloatField;
-    Dbf2ITEMS: TLongintField;
-    Dbf2JTH: TStringField;
-    Dbf2LENBAD: TLongintField;
-    Dbf2LENCPK: TFloatField;
-    Dbf2LENCV: TFloatField;
-    Dbf2LENMAX: TFloatField;
-    Dbf2LENMEAN: TFloatField;
-    Dbf2LENMIN: TFloatField;
-    Dbf2LENSD: TFloatField;
-    Dbf2NAME: TStringField;
-    Dbf2NUM: TLongintField;
-    Dbf2OVALBAD: TLongintField;
-    Dbf2OVALCPK: TFloatField;
-    Dbf2OVALCV: TFloatField;
-    Dbf2OVALMAX: TFloatField;
-    Dbf2OVALMEAN: TFloatField;
-    Dbf2OVALMIN: TFloatField;
-    Dbf2OVALSD: TFloatField;
-    Dbf2PDCBAD: TLongintField;
-    Dbf2PDCCPK: TFloatField;
-    Dbf2PDCCV: TFloatField;
-    Dbf2PDCMAX: TLongintField;
-    Dbf2PDCMEAN: TLongintField;
-    Dbf2PDCMIN: TLongintField;
-    Dbf2PDCSD: TLongintField;
-    Dbf2PDOBAD: TLongintField;
-    Dbf2PDOCPK: TFloatField;
-    Dbf2PDOCV: TFloatField;
-    Dbf2PDOMAX: TLongintField;
-    Dbf2PDOMEAN: TLongintField;
-    Dbf2PDOMIN: TLongintField;
-    Dbf2PDOMMWGCPK: TFloatField;
-    Dbf2PDOMMWGCV: TFloatField;
-    Dbf2PDOMMWGMAX: TLongintField;
-    Dbf2PDOMMWGMEA: TLongintField;
-    Dbf2PDOMMWGMIN: TLongintField;
-    Dbf2PDOMMWGSD: TLongintField;
-    Dbf2PDOSD: TLongintField;
-    Dbf2PH: TStringField;
-    Dbf2PVBAD: TLongintField;
-    Dbf2PVCPK: TFloatField;
-    Dbf2PVCV: TFloatField;
-    Dbf2PVMAX: TFloatField;
-    Dbf2PVMEAN: TFloatField;
-    Dbf2PVMIN: TFloatField;
-    Dbf2PVSD: TFloatField;
-    Dbf2TIME: TStringField;
-    Dbf2VBAD: TLongintField;
-    Dbf2VCPK: TFloatField;
-    Dbf2VCV: TFloatField;
-    Dbf2VMAX: TFloatField;
-    Dbf2VMEAN: TFloatField;
-    Dbf2VMIN: TFloatField;
-    Dbf2VSD: TFloatField;
-    Dbf2WGBAD: TLongintField;
-    Dbf2WGCPK: TFloatField;
-    Dbf2WGCV: TFloatField;
-    Dbf2WGMAX: TFloatField;
-    Dbf2WGMEAN: TFloatField;
-    Dbf2WGMIN: TFloatField;
-    Dbf2WGSD: TFloatField;
-    Dbf2YPBH: TStringField;
-    Dbf3: TDbf;
     DirectoryEdit1: TDirectoryEdit;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -157,6 +30,7 @@ type
     Label5: TLabel;
     Label7: TLabel;
     PageControl1: TPageControl;
+    Panel1: TPanel;
     StatusBar1: TStatusBar;
     StringGrid1: TStringGrid;
     StringGrid2: TStringGrid;
@@ -170,7 +44,6 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure DirectoryEdit1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormWindowStateChange(Sender: TObject);
@@ -188,8 +61,7 @@ type
     { public declarations }
     procedure ClearStringGrid(const Grid: TStringGrid);
     procedure UpdateGrid(Sender: TObject; YPBH: string);
-    function ConvertDate(s: TDateTime): string;
-    function GetNr(txt: string): string;
+    function ConvertDate(s: string): string;
     function GetShift(tijd: string): string;
     function GetFloat(s: string): double;
   end;
@@ -240,6 +112,10 @@ procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
 	 IniPropStorage1.Save;
     DataModule1.MySQL56Connection1.Close;
+
+   cfg.Free;
+   ctdata1.Free;
+   ctdata2.Free;
 end;
 
 // empty the stringgrid
@@ -254,25 +130,14 @@ begin
 end;
 
 // checks date format and returns yyyy-mm-yy
-function TForm1.ConvertDate(s: TDateTime): string;
-begin
-   Result := FormatDateTime('YYYY-MM-DD', s);
-end;
-
-// return a string with the first numerical digits of a string
-function TForm1.GetNr(txt: string): string;
+function TForm1.ConvertDate(s: string): string;
 var
-   nr: string;
-   kar: Char;
+  Y, M, D: string;
 begin
-   nr := '';
-	for kar in txt do begin
-		if (Ord(kar) >= Ord('0')) and (Ord(kar) <= Ord('9')) then
-  	   	nr := nr + string(kar);
-		if kar = ' ' then
-      	break;	// skip the remainder of the string
-	end;
-   Result := nr;
+   Y := copy(s, 1, 4);
+   M := copy(s, 5, 2);
+   D := copy(s, 7, 2);
+   Result := Y+'-'+M+'-'+D;
 end;
 
 // converts a string to double, returns 0 when conversion is not possible
@@ -296,21 +161,20 @@ var
 begin
 	ClearStringGrid(StringGrid1);
 
+   // show field names
    StringGrid1.RowCount := 1;
    StringGrid1.ColCount := ctdata2.numfields+1;
    for i := 0 to ctdata2.NumFields-1 do
       StringGrid1.Cells[i, 0] := ctdata2.fielddev[i].name;
 
-   r := 1;
-   WHILE r <= ctdata2.NumRecs DO BEGIN
-      if ctdata2.GetField('YPBH', r) = YPBH then begin
-      	StringGrid1.RowCount := StringGrid1.RowCount+1;
+   // show the details
+   if ctdata2.Locate('YPBH', YPBH) then begin
+		StringGrid1.RowCount := Length(ctdata2.filter)+1;
+      for r := 1 to Length(ctdata2.filter) do begin
          FOR i := 0 TO ctdata2.NumFields-1 DO
-				StringGrid1.Cells[i, StringGrid1.RowCount-1] := ctdata2.GetFieldNr(i, r);
+				StringGrid1.Cells[i, r] := ctdata2.GetFieldNr(i, ctdata2.filter[r-1]);
       end;
-		r := r+1;
-   END;
-   DebugLn(inttostr(StringGrid1.RowCount));
+   end;
 end;
 
 // temporarily disable updates (10min) to browse through the data
@@ -349,118 +213,104 @@ begin
 	UpdateGrid(Sender, StringGrid3.Cells[i, 1]);
 
    Timer1.Enabled := false;
+   Timer2.Enabled := true;
 end;
 
 // reads the specifications from the laboratory station and sends it to the server (adds it, doesn't replace)
 procedure TForm1.Button2Click(Sender: TObject);
 var
-   prodnr, MeasFormat: string;
+   prodname, MeasFormat: string;
+   recordnr: integer;
 begin
 	Timer1.Enabled := false;
-   Timer2.Enabled := false;
-   Dbf1.Open;
-   DataModule1.Connect(Sender);		// connect to server
+	Timer2.Enabled := false;
 
+	DataModule1.Connect(Sender);		// connect to server
    if DataModule1.MySQL56Connection1.Connected then begin
    	with DataModule1.SQLQuery1 do begin
-			Dbf1.First;
-			while not Dbf1.Eof do begin
-				prodnr := GetNr(DataSource1.Dataset.FieldByName('PH').AsString);
-				if (prodnr <> '') then begin	// sla alleen produkten met nummer op
-					with DataSource1.Dataset do begin
-						MeasFormat := ':PH, :WGLO, :WGSTD, :WGHI, :CIRLO, :CIRSTD, :CIRHI, :LENLO, :LENSTD, :LENHI, '+
-											':PDOLO, :PDOSTD, :PDOHI, :VLO, :VSTD, :VHI, :HDLO, :HDSTD, :HDHI';
-                  SQL.Text:='INSERT INTO products_finished (`name`, `weight_min`, `weight`, `weight_max`, `circ_min`, `circ`, `circ_max`, '+
-										'`len_min`, `len`, `len_max`, `pd_min`, `pd`, `pd_max`, `vent_min`, `vent`, `vent_max`,'+
-										'`hd_min`, `hd`, `hd_max`) VALUES ('+MeasFormat+')';
-                  Params.ParamByName('PH').AsString := prodnr;
-                  Params.ParamByName('WGLO').AsString := FieldByName('WGLO').AsString;
-                  Params.ParamByName('WGSTD').AsString := FieldByName('WGSTD').AsString;
-                  Params.ParamByName('WGHI').AsString := FieldByName('WGHI').AsString;
-                  Params.ParamByName('CIRLO').AsString := FieldByName('CIRLO').AsString;
-                  Params.ParamByName('CIRSTD').AsString := FieldByName('CIRSTD').AsString;
-                  Params.ParamByName('CIRHI').AsString := FieldByName('CIRHI').AsString;
-                  Params.ParamByName('LENLO').AsString := FieldByName('LENLO').AsString;
-                  Params.ParamByName('LENSTD').AsString := FieldByName('LENSTD').AsString;
-                  Params.ParamByName('LENHI').AsString := FieldByName('LENHI').AsString;
-                  Params.ParamByName('PDOLO').AsString := FieldByName('PDOLO').AsString;
-                  Params.ParamByName('PDOSTD').AsString := FieldByName('PDOSTD').AsString;
-                  Params.ParamByName('PDOHI').AsString := FieldByName('PDOHI').AsString;
-                  Params.ParamByName('VLO').AsString := FieldByName('VLO').AsString;
-                  Params.ParamByName('VSTD').AsString := FieldByName('VSTD').AsString;
-                  Params.ParamByName('VHI').AsString := FieldByName('VHI').AsString;
-                  Params.ParamByName('HDLO').AsString := FieldByName('HDLO').AsString;
-                  Params.ParamByName('HDSTD').AsString := FieldByName('HDSTD').AsString;
-                  Params.ParamByName('HDHI').AsString := FieldByName('HDHI').AsString;
-               end;
-               ExecSQL;
-     	         DataModule1.SQLTransaction1.Commit;
-            end;
-            Dbf1.Next;
+      	recordnr := 1;
+         while recordnr < cfg.numrecs do begin
+            prodname := cfg.GetField('PH', recordnr);
+				MeasFormat := ':PH, :WGLO, :WGSTD, :WGHI, :CIRLO, :CIRSTD, :CIRHI, :LENLO, :LENSTD, :LENHI, '+
+									':PDOLO, :PDOSTD, :PDOHI, :VLO, :VSTD, :VHI, :HDLO, :HDSTD, :HDHI';
+				SQL.Text:='INSERT INTO products_finished (`name`, `weight_min`, `weight`, `weight_max`, `circ_min`, `circ`, `circ_max`, '+
+								'`len_min`, `len`, `len_max`, `pd_min`, `pd`, `pd_max`, `vent_min`, `vent`, `vent_max`,'+
+								'`hd_min`, `hd`, `hd_max`) VALUES ('+MeasFormat+')';
+				Params.ParamByName('PH').AsString := prodname;
+				Params.ParamByName('WGLO').AsString := cfg.GetField('WGLO', recordnr);
+				Params.ParamByName('WGSTD').AsString := cfg.GetField('WGSTD', recordnr);
+				Params.ParamByName('WGHI').AsString := cfg.GetField('WGHI', recordnr);
+				Params.ParamByName('CIRLO').AsString := cfg.GetField('CIRLO', recordnr);
+				Params.ParamByName('CIRSTD').AsString := cfg.GetField('CIRSTD', recordnr);
+				Params.ParamByName('CIRHI').AsString := cfg.GetField('CIRHI', recordnr);
+				Params.ParamByName('LENLO').AsString := cfg.GetField('LENLO', recordnr);
+				Params.ParamByName('LENSTD').AsString := cfg.GetField('LENSTD', recordnr);
+				Params.ParamByName('LENHI').AsString := cfg.GetField('LENHI', recordnr);
+				Params.ParamByName('PDOLO').AsString := cfg.GetField('PDOLO', recordnr);
+				Params.ParamByName('PDOSTD').AsString := cfg.GetField('PDOSTD', recordnr);
+				Params.ParamByName('PDOHI').AsString := cfg.GetField('PDOHI', recordnr);
+				Params.ParamByName('VLO').AsString := cfg.GetField('VLO', recordnr);
+				Params.ParamByName('VSTD').AsString := cfg.GetField('VSTD', recordnr);
+				Params.ParamByName('VHI').AsString := cfg.GetField('VHI', recordnr);
+				Params.ParamByName('HDLO').AsString := cfg.GetField('HDLO', recordnr);
+				Params.ParamByName('HDSTD').AsString := cfg.GetField('HDSTD', recordnr);
+				Params.ParamByName('HDHI').AsString := cfg.GetField('HDHI', recordnr);
+				ExecSQL;
+				DataModule1.SQLTransaction1.Commit;
+            recordnr := recordnr+1;
          end;
       end;
+
    end;
 
-   DataModule1.DisConnect(Sender);		// disconnect to server
-   Dbf1.Close;
-	Timer1.Enabled := true;
-   Timer2.Enabled := true;
 end;
 
 // reads the specifications from the workfloor station and sends it to the server (adds it, doesn't replace)
 procedure TForm1.Button3Click(Sender: TObject);
 var
-   prodnr, MeasFormat: string;
+   prodname, MeasFormat: string;
+   recordnr: integer;
 begin
 	Timer1.Enabled := false;
-   Timer2.Enabled := false;
-   Dbf1.Open;
-   DataModule1.Connect(Sender);		// connect to server
+	Timer2.Enabled := false;
 
+	DataModule1.Connect(Sender);		// connect to server
    if DataModule1.MySQL56Connection1.Connected then begin
    	with DataModule1.SQLQuery1 do begin
-			Dbf1.First;
-			while not Dbf1.Eof do begin
-				prodnr := GetNr(DataSource1.Dataset.FieldByName('PH').AsString);
-				if (prodnr <> '') then begin	// sla alleen produkten met nummer op
-					with DataSource1.Dataset do begin
-						MeasFormat := ':PH, :WGLO, :WGSTD, :WGHI, :CIRLO, :CIRSTD, :CIRHI, :LENLO, :LENSTD, :LENHI, '+
-											':PDOLO, :PDOSTD, :PDOHI, :VLO, :VSTD, :VHI, :HDLO, :HDSTD, :HDHI';
-                  SQL.Text:='INSERT INTO products_workfloor (`name`, `weight_min`, `weight`, `weight_max`, `circ_min`, `circ`, `circ_max`, '+
-										'`len_min`, `len`, `len_max`, `pd_min`, `pd`, `pd_max`, `vent_min`, `vent`, `vent_max`,'+
-										'`hd_min`, `hd`, `hd_max`) VALUES ('+MeasFormat+')';
-                  Params.ParamByName('PH').AsString := prodnr;
-                  Params.ParamByName('WGLO').AsString := FieldByName('WGLO').AsString;
-                  Params.ParamByName('WGSTD').AsString := FieldByName('WGSTD').AsString;
-                  Params.ParamByName('WGHI').AsString := FieldByName('WGHI').AsString;
-                  Params.ParamByName('CIRLO').AsString := FieldByName('CIRLO').AsString;
-                  Params.ParamByName('CIRSTD').AsString := FieldByName('CIRSTD').AsString;
-                  Params.ParamByName('CIRHI').AsString := FieldByName('CIRHI').AsString;
-                  Params.ParamByName('LENLO').AsString := FieldByName('LENLO').AsString;
-                  Params.ParamByName('LENSTD').AsString := FieldByName('LENSTD').AsString;
-                  Params.ParamByName('LENHI').AsString := FieldByName('LENHI').AsString;
-                  Params.ParamByName('PDOLO').AsString := FieldByName('PDOLO').AsString;
-                  Params.ParamByName('PDOSTD').AsString := FieldByName('PDOSTD').AsString;
-                  Params.ParamByName('PDOHI').AsString := FieldByName('PDOHI').AsString;
-                  Params.ParamByName('VLO').AsString := FieldByName('VLO').AsString;
-                  Params.ParamByName('VSTD').AsString := FieldByName('VSTD').AsString;
-                  Params.ParamByName('VHI').AsString := FieldByName('VHI').AsString;
-                  Params.ParamByName('HDLO').AsString := FieldByName('HDLO').AsString;
-                  Params.ParamByName('HDSTD').AsString := FieldByName('HDSTD').AsString;
-                  Params.ParamByName('HDHI').AsString := FieldByName('HDHI').AsString;
-               end;
-               ExecSQL;
-     	         DataModule1.SQLTransaction1.Commit;
-            end;
-            Dbf1.Next;
+      	recordnr := 1;
+         while recordnr < cfg.numrecs do begin
+            prodname := cfg.GetField('PH', recordnr);
+				MeasFormat := ':PH, :WGLO, :WGSTD, :WGHI, :CIRLO, :CIRSTD, :CIRHI, :LENLO, :LENSTD, :LENHI, '+
+									':PDOLO, :PDOSTD, :PDOHI, :VLO, :VSTD, :VHI, :HDLO, :HDSTD, :HDHI';
+				SQL.Text:='INSERT INTO products_finished (`name`, `weight_min`, `weight`, `weight_max`, `circ_min`, `circ`, `circ_max`, '+
+								'`len_min`, `len`, `len_max`, `pd_min`, `pd`, `pd_max`, `vent_min`, `vent`, `vent_max`,'+
+								'`hd_min`, `hd`, `hd_max`) VALUES ('+MeasFormat+')';
+				Params.ParamByName('PH').AsString := prodname;
+				Params.ParamByName('WGLO').AsString := cfg.GetField('WGLO', recordnr);
+				Params.ParamByName('WGSTD').AsString := cfg.GetField('WGSTD', recordnr);
+				Params.ParamByName('WGHI').AsString := cfg.GetField('WGHI', recordnr);
+				Params.ParamByName('CIRLO').AsString := cfg.GetField('CIRLO', recordnr);
+				Params.ParamByName('CIRSTD').AsString := cfg.GetField('CIRSTD', recordnr);
+				Params.ParamByName('CIRHI').AsString := cfg.GetField('CIRHI', recordnr);
+				Params.ParamByName('LENLO').AsString := cfg.GetField('LENLO', recordnr);
+				Params.ParamByName('LENSTD').AsString := cfg.GetField('LENSTD', recordnr);
+				Params.ParamByName('LENHI').AsString := cfg.GetField('LENHI', recordnr);
+				Params.ParamByName('PDOLO').AsString := cfg.GetField('PDOLO', recordnr);
+				Params.ParamByName('PDOSTD').AsString := cfg.GetField('PDOSTD', recordnr);
+				Params.ParamByName('PDOHI').AsString := cfg.GetField('PDOHI', recordnr);
+				Params.ParamByName('VLO').AsString := cfg.GetField('VLO', recordnr);
+				Params.ParamByName('VSTD').AsString := cfg.GetField('VSTD', recordnr);
+				Params.ParamByName('VHI').AsString := cfg.GetField('VHI', recordnr);
+				Params.ParamByName('HDLO').AsString := cfg.GetField('HDLO', recordnr);
+				Params.ParamByName('HDSTD').AsString := cfg.GetField('HDSTD', recordnr);
+				Params.ParamByName('HDHI').AsString := cfg.GetField('HDHI', recordnr);
+				ExecSQL;
+				DataModule1.SQLTransaction1.Commit;
+            recordnr := recordnr+1;
          end;
       end;
-   end;
 
-   DataModule1.DisConnect(Sender);		// disconnect to server
-   Dbf1.Close;
-	Timer1.Enabled := true;
-   Timer2.Enabled := true;
+   end;
 end;
 
 function TForm1.GetShift(tijd: string): string;
@@ -483,19 +333,7 @@ begin
    else if InRange(min, 120, 1320) then
    	Result := '4';
 
-end;
-
-// set the database location for the dbase tables
-procedure TForm1.DirectoryEdit1Change(Sender: TObject);
-var
-   pad: string;
-begin
-	pad := DirectoryEdit1.Text;
-
-   // open the dbase tables
-   //cfg.Open(DirectoryEdit1.Text);
-   //ctdata1.Open(pad);
-   //ctdata2.Open(pad);
+   List.Free;
 end;
 
 procedure TForm1.FormWindowStateChange(Sender: TObject);
@@ -522,14 +360,18 @@ end;
 procedure TForm1.Timer1Timer(Sender: TObject);
 var
    sticks: string;
-   prodnr, YPBH, nr, MeasFormat, MS, row: string;
+   YPBH, nr, MeasFormat, MS, row: string;
 	S : TDateTime;
 	fs: int64;
+   recordnr, detailnr: integer;
    spec_hd, spec_circ, spec_len, spec_pd, spec_vent, spec_weight: string;
    n1, n2: single;
    spec_name, spec_nr, spec_weight_min, spec_weight_max, spec_circ_min, spec_circ_max, spec_len_min, spec_len_max: string;
-   spec_pd_min, spec_pd_max, spec_hd_min, spec_hd_max, spec_vent_min, spec_vent_max: string;
+   spec_pd_min, spec_pd_max, spec_hd_min, spec_hd_max, spec_vent_min, spec_vent_max, spec_pid: string;
 begin
+	Timer1.Enabled:=false;
+   Timer2.Enabled:=false;
+
    if (teller = 0) then
 	   teller := 10;        // process a maximum of 10 new records
 
@@ -538,7 +380,7 @@ begin
 
    // sync the specifications with the server
    DebugLn('connecting');
-   DataModule1.Connect(Sender);		// connect to server
+   DataModule1.Connect(Sender);		// connect to the main server
    DebugLn('after connect');
    if DataModule1.MySQL56Connection1.Connected then begin
    	with DataModule1.SQLQuery1 do begin
@@ -547,25 +389,19 @@ begin
    		SQL.Text:='SELECT force_update FROM stations WHERE name='+Edit2.Text;		// check if there is a force update specs on the server
          Open;
          if (FieldByName('force_update').AsInteger > 0) then begin
-            //Application.MessageBox('force update', Pchar(Edit2.Text));
+            DebugLn('force update');
 
-          	Close;
-   			SQL.Text:='CHECKSUM TABLE products_finished';		// get the checksum of the spec-table from the server
-   			Open;
-            Edit3.Text := FieldByName('Checksum').AsString;		// store the new checksum
+            cfg.Empty();  // delete all records from the dbase table
+            recordnr := 0;
 
-				Dbf1.Close;
-				Dbf1.Exclusive := true;
-				Dbf1.Open;	// open de specs on the station
-
-            Close;
-	   		SQL.Text:='SELECT * FROM products_finished WHERE DATE(end) = "3000-01-01" ';		// select the latest specs from the server
-   			Open;
+				Close;
+				SQL.Text:='SELECT * FROM products_finished WHERE DATE(end) = "3000-01-01" ';		// select the latest specs from the server
+				Open;
 
             while (not Eof) do begin
                // get all specs from the server
                spec_name := FieldByName('name').AsString;
-               spec_nr := GetNr(FieldByName('name').AsString);  // get the product number (chinese characters can not be stored)
+               spec_pid := FieldByName('pid').AsString;
                if (FieldByName('weight').AsString='') then spec_weight:='0' else spec_weight:=FieldByName('weight').AsString;
                if (FieldByName('weight_min').AsString='') then spec_weight_min:='0' else spec_weight_min:=FieldByName('weight_min').AsString;
                if (FieldByName('weight_max').AsString='') then spec_weight_max:='0' else spec_weight_max:=FieldByName('weight_max').AsString;
@@ -585,66 +421,47 @@ begin
                if (FieldByName('hd_min').AsString='') then spec_hd_min:='0' else spec_hd_min:=FieldByName('hd_min').AsString;
                if (FieldByName('hd_max').AsString='') then spec_hd_max:='0' else spec_hd_max:=FieldByName('hd_max').AsString;
 
-               // find the corresponding spec on the station (only use the number because utf is not supported in tdbf)
+               // add the spec to the empty file
+               cfg.Append();
+               recordnr := recordnr+1;
+               cfg.SetField('PH', recordnr, spec_name);
+               cfg.SetField('ITEMS', recordnr, spec_pid);
+               cfg.SetField('WGSTD', recordnr, spec_weight);
+               cfg.SetField('WGLO', recordnr, spec_weight_min);
+               cfg.SetField('WGHI', recordnr, spec_weight_max);
+               cfg.SetField('CIRSTD', recordnr, spec_circ);
+               cfg.SetField('CIRLO', recordnr, spec_circ_min);
+               cfg.SetField('CIRHI', recordnr, spec_circ_max);
+               cfg.SetField('LENSTD', recordnr, spec_len);
+               cfg.SetField('LENLO', recordnr, spec_len_min);
+               cfg.SetField('LENHI', recordnr, spec_len_max);
+               cfg.SetField('PDOSTD', recordnr, spec_pd);
+               cfg.SetField('PDOLO', recordnr, spec_pd_min);
+               cfg.SetField('PDOHI', recordnr, spec_pd_max);
+               cfg.SetField('VSTD', recordnr, spec_vent);
+               cfg.SetField('VLO', recordnr, spec_vent_min);
+               cfg.SetField('VHI', recordnr, spec_vent_max);
+               cfg.SetField('HDSTD', recordnr, spec_hd);
+               cfg.SetField('HDLO', recordnr, spec_hd_min);
+               cfg.SetField('HDHI', recordnr, spec_hd_max);
 
-               // update this spec or add the new spec
-               Dbf1.FilterOptions := [foCaseInsensitive];
-               Dbf1.Filter := 'PH="' + spec_nr + ' *"';
-               Dbf1.Filtered := true;
-               Dbf1.First;
-
-					if (not Dbf1.Eof) then begin
-               	// update the station
-                  Dbf1.Edit;
-                  Dbf1.FieldByName('WGSTD').Value := spec_weight;
-                  Dbf1.FieldByName('WGLO').Value := spec_weight_min;
-						Dbf1.FieldByName('WGHI').Value := spec_weight_max;
-                  Dbf1.FieldByName('CIRSTD').Value := spec_circ;
-                  Dbf1.FieldByName('CIRLO').Value := spec_circ_min;
-						Dbf1.FieldByName('CIRHI').Value := spec_circ_max;
-                  Dbf1.FieldByName('LENSTD').Value := spec_len;
-                  Dbf1.FieldByName('LENLO').Value := spec_len_min;
-						Dbf1.FieldByName('LENHI').Value := spec_len_max;
-                  Dbf1.FieldByName('PDOSTD').Value := spec_pd;
-                  Dbf1.FieldByName('PDOLO').Value := spec_pd_min;
-						Dbf1.FieldByName('PDOHI').Value := spec_pd_max;
-                  Dbf1.FieldByName('VSTD').Value := spec_vent;
-                  Dbf1.FieldByName('VLO').Value := spec_vent_min;
-						Dbf1.FieldByName('VHI').Value := spec_vent_max;
-                  Dbf1.FieldByName('HDSTD').Value := spec_hd;
-                  Dbf1.FieldByName('HDLO').Value := spec_hd_min;
-						Dbf1.FieldByName('HDHI').Value := spec_hd_max;
-                  Dbf1.Post;
-               end else begin
-               	// adds a new spec on the station (DOES NOT WRITE UTF8 CHARACTERS TO DBF)
-                  //Application.MessageBox(Pchar(spec_name), 'NOT FOUND');
-                  Dbf1.Insert;
-                  Dbf1.FieldByName('PH').Value := spec_nr+' ...';	// the name is utf8 and must later be manually filled on the stations
-                  Dbf1.FieldByName('WGSTD').Value := spec_weight;
-                  Dbf1.FieldByName('WGLO').Value := spec_weight_min;
-						Dbf1.FieldByName('WGHI').Value := spec_weight_max;
-                  Dbf1.FieldByName('CIRSTD').Value := spec_circ;
-                  Dbf1.FieldByName('CIRLO').Value := spec_circ_min;
-						Dbf1.FieldByName('CIRHI').Value := spec_circ_max;
-                  Dbf1.FieldByName('LENSTD').Value := spec_len;
-                  Dbf1.FieldByName('LENLO').Value := spec_len_min;
-						Dbf1.FieldByName('LENHI').Value := spec_len_max;
-                  Dbf1.FieldByName('PDOSTD').Value := spec_pd;
-                  Dbf1.FieldByName('PDOLO').Value := spec_pd_min;
-						Dbf1.FieldByName('PDOHI').Value := spec_pd_max;
-                  Dbf1.FieldByName('VSTD').Value := spec_vent;
-                  Dbf1.FieldByName('VLO').Value := spec_vent_min;
-						Dbf1.FieldByName('VHI').Value := spec_vent_max;
-                  Dbf1.FieldByName('HDSTD').Value := spec_hd;
-                  Dbf1.FieldByName('HDLO').Value := spec_hd_min;
-						Dbf1.FieldByName('HDHI').Value := spec_hd_max;
-                  Dbf1.Post;
-               end;
+               // the remaining fields that are not used
+               cfg.SetField('PDOMMWGSTD', recordnr, '');
+               cfg.SetField('PDOMMWGLO', recordnr, '');
+               cfg.SetField('PDOMMWGHI', recordnr, '');
+               cfg.SetField('PDCSTD', recordnr, '');
+               cfg.SetField('PDCLO', recordnr, '');
+               cfg.SetField('PDCHI', recordnr, '');
+               cfg.SetField('FVSTD', recordnr, '');
+               cfg.SetField('FVLO', recordnr, '');
+               cfg.SetField('FVHI', recordnr, '');
+               cfg.SetField('PVSTD', recordnr, '');
+               cfg.SetField('PVLO', recordnr, '');
+               cfg.SetField('PVHI', recordnr, '');
                Next;
             end;
-            Dbf1.Close;
-            Dbf1.Exclusive := false;
 
+            DebugLn('reset force update');
             SQL.Text:='UPDATE stations SET force_update=0, date=NOW() WHERE name='+Edit2.Text;
             ExecSQL;
 	         DataModule1.SQLTransaction1.Commit;
@@ -654,13 +471,10 @@ begin
    		SQL.Text:='CHECKSUM TABLE products_finished';		// get the checksum of the spec-table from the server
    		Open;
 
-         DebugLn( 'Checksum Specs = '+FieldByName('Checksum').AsString);
          if (Edit3.Text <> FieldByName('Checksum').AsString) then begin
-            Dbf1.Close;
-            Dbf1.Exclusive := true;
-            Dbf1.Open;	// open de specs on the station
 
             Edit3.Text := FieldByName('Checksum').AsString;		// store the new checksum
+
             Close;
 	   		SQL.Text:='SELECT * FROM products_finished WHERE DATE(end) = "3000-01-01" ';		// select the latest specs from the server
    			Open;
@@ -668,7 +482,7 @@ begin
             while (not Eof) do begin
                // get all specs from the server
                spec_name := FieldByName('name').AsString;
-               spec_nr := GetNr(FieldByName('name').AsString);  // get the product number (chinese characters can not be stored)
+               spec_pid := FieldByName('pid').AsString;
                if (FieldByName('weight').AsString='') then spec_weight:='0' else spec_weight:=FieldByName('weight').AsString;
                if (FieldByName('weight_min').AsString='') then spec_weight_min:='0' else spec_weight_min:=FieldByName('weight_min').AsString;
                if (FieldByName('weight_max').AsString='') then spec_weight_max:='0' else spec_weight_max:=FieldByName('weight_max').AsString;
@@ -688,74 +502,61 @@ begin
                if (FieldByName('hd_min').AsString='') then spec_hd_min:='0' else spec_hd_min:=FieldByName('hd_min').AsString;
                if (FieldByName('hd_max').AsString='') then spec_hd_max:='0' else spec_hd_max:=FieldByName('hd_max').AsString;
 
-               // find the corresponding spec on the station (only use the number because utf is not supported in tdbf)
-
-               // update this spec or add the new spec
-               Dbf1.FilterOptions := [foCaseInsensitive];
-               Dbf1.Filter := 'PH="' + spec_nr + ' *"';
-               Dbf1.Filtered := true;
-               Dbf1.First;
-					if (not Dbf1.Eof) then begin
-               	// update the station
-                  //Application.MessageBox(Pchar(spec_weight), 'FOUND');
-                  Dbf1.Edit;
-                  Dbf1.FieldByName('WGSTD').Value := spec_weight;
-                  Dbf1.FieldByName('WGLO').Value := spec_weight_min;
-						Dbf1.FieldByName('WGHI').Value := spec_weight_max;
-                  Dbf1.FieldByName('CIRSTD').Value := spec_circ;
-                  Dbf1.FieldByName('CIRLO').Value := spec_circ_min;
-						Dbf1.FieldByName('CIRHI').Value := spec_circ_max;
-                  Dbf1.FieldByName('LENSTD').Value := spec_len;
-                  Dbf1.FieldByName('LENLO').Value := spec_len_min;
-						Dbf1.FieldByName('LENHI').Value := spec_len_max;
-                  Dbf1.FieldByName('PDOSTD').Value := spec_pd;
-                  Dbf1.FieldByName('PDOLO').Value := spec_pd_min;
-						Dbf1.FieldByName('PDOHI').Value := spec_pd_max;
-                  Dbf1.FieldByName('VSTD').Value := spec_vent;
-                  Dbf1.FieldByName('VLO').Value := spec_vent_min;
-						Dbf1.FieldByName('VHI').Value := spec_vent_max;
-                  Dbf1.FieldByName('HDSTD').Value := spec_hd;
-                  Dbf1.FieldByName('HDLO').Value := spec_hd_min;
-						Dbf1.FieldByName('HDHI').Value := spec_hd_max;
-                  Dbf1.Post;
+               // find the corresponding spec on the station
+               if cfg.Locate('ITEMS', spec_pid) then begin
+                  recordnr := cfg.filter[0];
                end else begin
-               	// adds a new spec on the station (DOES NOT WRITE UTF8 CHARACTERS TO DBF)
-                  //Application.MessageBox(Pchar(spec_name), 'NOT FOUND');
-                  Dbf1.Insert;
-                  Dbf1.FieldByName('PH').Value := spec_nr+' ...';	// the name is utf8 and must later be manually filled on the stations
-                  Dbf1.FieldByName('WGSTD').Value := spec_weight;
-                  Dbf1.FieldByName('WGLO').Value := spec_weight_min;
-						Dbf1.FieldByName('WGHI').Value := spec_weight_max;
-                  Dbf1.FieldByName('CIRSTD').Value := spec_circ;
-                  Dbf1.FieldByName('CIRLO').Value := spec_circ_min;
-						Dbf1.FieldByName('CIRHI').Value := spec_circ_max;
-                  Dbf1.FieldByName('LENSTD').Value := spec_len;
-                  Dbf1.FieldByName('LENLO').Value := spec_len_min;
-						Dbf1.FieldByName('LENHI').Value := spec_len_max;
-                  Dbf1.FieldByName('PDOSTD').Value := spec_pd;
-                  Dbf1.FieldByName('PDOLO').Value := spec_pd_min;
-						Dbf1.FieldByName('PDOHI').Value := spec_pd_max;
-                  Dbf1.FieldByName('VSTD').Value := spec_vent;
-                  Dbf1.FieldByName('VLO').Value := spec_vent_min;
-						Dbf1.FieldByName('VHI').Value := spec_vent_max;
-                  Dbf1.FieldByName('HDSTD').Value := spec_hd;
-                  Dbf1.FieldByName('HDLO').Value := spec_hd_min;
-						Dbf1.FieldByName('HDHI').Value := spec_hd_max;
-                  Dbf1.Post;
+                  cfg.Append();
+                  recordnr := cfg.numrecs-1;
                end;
+
+					cfg.SetField('PH', recordnr, spec_name);
+               cfg.SetField('ITEMS', recordnr, spec_pid);
+					cfg.SetField('WGSTD', recordnr, spec_weight);
+					cfg.SetField('WGLO', recordnr, spec_weight_min);
+					cfg.SetField('WGHI', recordnr, spec_weight_max);
+					cfg.SetField('CIRSTD', recordnr, spec_circ);
+					cfg.SetField('CIRLO', recordnr, spec_circ_min);
+					cfg.SetField('CIRHI', recordnr, spec_circ_max);
+               cfg.SetField('LENSTD', recordnr, spec_len);
+               cfg.SetField('LENLO', recordnr, spec_len_min);
+               cfg.SetField('LENHI', recordnr, spec_len_max);
+               cfg.SetField('PDOSTD', recordnr, spec_pd);
+               cfg.SetField('PDOLO', recordnr, spec_pd_min);
+               cfg.SetField('PDOHI', recordnr, spec_pd_max);
+               cfg.SetField('VSTD', recordnr, spec_vent);
+               cfg.SetField('VLO', recordnr, spec_vent_min);
+               cfg.SetField('VHI', recordnr, spec_vent_max);
+               cfg.SetField('HDSTD', recordnr, spec_hd);
+               cfg.SetField('HDLO', recordnr, spec_hd_min);
+               cfg.SetField('HDHI', recordnr, spec_hd_max);
+
+               // the remaining fields that are not used
+               cfg.SetField('PDOMMWGSTD', recordnr, '');
+               cfg.SetField('PDOMMWGLO', recordnr, '');
+               cfg.SetField('PDOMMWGHI', recordnr, '');
+               cfg.SetField('PDCSTD', recordnr, '');
+               cfg.SetField('PDCLO', recordnr, '');
+               cfg.SetField('PDCHI', recordnr, '');
+               cfg.SetField('FVSTD', recordnr, '');
+               cfg.SetField('FVLO', recordnr, '');
+               cfg.SetField('FVHI', recordnr, '');
+               cfg.SetField('PVSTD', recordnr, '');
+               cfg.SetField('PVLO', recordnr, '');
+               cfg.SetField('PVHI', recordnr, '');
                Next;
             end;
-            Dbf1.Close;
-            Dbf1.Exclusive := false;
 
             SQL.Text:='UPDATE stations SET force_update=0, date=NOW() WHERE name='+Edit2.Text;
             ExecSQL;
 	         DataModule1.SQLTransaction1.Commit;
          end;
+
       end;
    end;
 
-   fs:=FileSize(IncludeTrailingPathDelimiter(DirectoryEdit1.Text)+'CtData1.DBF');
+   fs := FileSize(IncludeTrailingPathDelimiter(DirectoryEdit1.Text)+'CtData1.DBF');
+   LastSize := fs;
 
    DebugLn('size database station = '+dbgs(fs));
    DebugLn('last size = '+dbgs(LastSize));
@@ -765,154 +566,151 @@ begin
       Form1.Caption := 'Last Update at: '+DateTimeToStr(Now);
       Form1.Caption := intToStr(fs);
    	LastSize := fs;
-     	Timer1.Enabled := false;
+
    	DataModule1.Connect(Sender);		// connect to server
-      Dbf3.Open;								// open the tables on the measuring station (get the latest data)
-      Dbf2.Open;
-      Dbf1.Open;
 
       if DataModule1.MySQL56Connection1.Connected then begin
       	with DataModule1.SQLQuery1 do begin
             DebugLn('teller = '+dbgs(teller));
-       		Dbf2.Last;
-            while (not Dbf2.Bof AND (teller > 0)) do begin
-    				YPBH := Edit2.Caption+'-'+DataSource2.Dataset.FieldByName('YPBH').AsString;
+
+            recordnr := ctdata1.numrecs-1;
+            while (recordnr > 0) and (teller > 0) do begin
+               YPBH := Edit2.Caption + '-' + ctdata1.GetField('YPBH', recordnr);
 
          		Close;
          		SQL.Text:='SELECT * FROM cigaret WHERE YPBH="'+YPBH+'"';		// check to see if the data is already stored
          		Open;
 
             	if (Eof) then begin 	// measurement not found
-               	prodnr := GetNr(DataSource2.Dataset.FieldByName('PH').AsString);
-                  DebugLn('productnr = '+prodnr);
-               	if (prodnr <> '') then begin	// sla alleen produkten met nummer op
-                     //Application.MessageBox(Pchar(row), '');
-                     teller := teller-1;
+               	spec_name := ctdata1.GetField('PH', recordnr);
 
-                     // find product specifications
-                     Close;
-                     SQL.Text:='SELECT * FROM products_finished WHERE id='+prodnr;
-                     Open;
-                     spec_hd := DataModule1.SQLQuery1.FieldByName('hd').AsString;
-                     spec_circ := DataModule1.SQLQuery1.FieldByName('circ').AsString;
-                     spec_len := DataModule1.SQLQuery1.FieldByName('len').AsString;
-                     spec_pd := DataModule1.SQLQuery1.FieldByName('pd').AsString;
-                     spec_vent := DataModule1.SQLQuery1.FieldByName('vent').AsString;
-                     spec_weight := DataModule1.SQLQuery1.FieldByName('weight').AsString;
+                  teller := teller-1;
 
-                  	with DataSource2.Dataset do begin
-                     	MeasFormat := ':DATE, :SHIFT, :ORIGIN, :PH, :ITEMS, :JTH, '+
-                        					':HDMAX, :HDMIN, :HDMEAN, :HDSD, :HDCV, :HDCPK, :HDBAD, :HDDIV, '+
-      									      ':CIRMAX, :CIRMIN, :CIRMEAN, :CIRSD, :CIRCV, :CIRCPK, :CIRBAD, :CIRDIV, '+
-      									      ':LENMAX, :LENMIN, :LENMEAN, :LENSD, :LENCV, :LENCPK, :LENBAD, :LENDIV, '+
-      									      ':PDOMAX, :PDOMIN, :PDOMEAN, :PDOSD, :PDOCV, :PDOCPK, :PDOBAD, :PDODIV, '+
-      								   	   ':VMAX, :VMIN, :VMEAN, :VSD, :VCV, :VCPK, :VBAD, :VDIV, '+
-      								      	':WGMAX, :WGMIN, :WGMEAN, :WGSD, :WGCV, :WGCPK, :WGBAD, :WGDIV, :YPBH';
-   	                  SQL.Text:='INSERT INTO cigaret(`date`, `shift`, `origin`, `product`, `bunching_m`, `packing_m`, `max_hd`, `min_hd`, '+
-      	               				'`avg_hd`, `dev_hd`, `var_hd`, `cpk_hd`, `out_hd`, `div_hd`, `max_circum`, `min_circum`, `avg_circum`, `dev_circum`, `var_circum`, '+
-         	                        '`cpk_circum`, `out_circum`, `div_circum`, `max_len`, `min_len`, `avg_len`, `dev_len`, `var_len`, `cpk_len`, `out_len`, `div_len`, '+
-            	                     '`max_pd`, `min_pd`, `avg_pd`, `dev_pd`, `var_pd`, `cpk_pd`, `out_pd`, `div_pd`, `max_vent`, `min_vent`, `avg_vent`, `dev_vent`, '+
-               	                  '`var_vent`, `cpk_vent`, `out_vent`, `div_vent`, `max_weight`, `min_weight`, `avg_weight`, `dev_weight`, `var_weight`, `cpk_weight`, '+
-                  	               '`out_weight`, `div_weight`, `YPBH`) '+
-                     	            'VALUES ('+MeasFormat+')';
-      	               Params.ParamByName('DATE').AsString := format('%s', [(ConvertDate(FieldByName('DATE').AsDateTime ) +' '+ FieldByName('TIME').AsString)]);
-                        Params.ParamByName('SHIFT').AsString := GetShift(FieldByName('TIME').AsString);
-                        Params.ParamByName('ORIGIN').AsString := Edit2.Text;
-         	            Params.ParamByName('PH').AsString := format('%s', [prodnr]);
-            	         Params.ParamByName('ITEMS').AsString := format('%s', [(FieldByName('ITEMS').AsString)]);
-               	      Params.ParamByName('JTH').AsString := format('%s', [(FieldByName('JTH').AsString)]);
-   							Params.ParamByName('HDMAX').AsString := FieldByName('HDMAX').AsString;
-   							Params.ParamByName('HDMIN').AsString := FieldByName('HDMIN').AsString;
-   	                  Params.ParamByName('HDMEAN').AsString :=  FieldByName('HDMEAN').AsString;
-      	               Params.ParamByName('HDSD').AsString := FieldByName('HDSD').AsString;
-         	            Params.ParamByName('HDCV').AsString := FieldByName('HDCV').AsString;
-            	         Params.ParamByName('HDCPK').AsString := FieldByName('HDCPK').AsString;
-               	      Params.ParamByName('HDBAD').AsString := FieldByName('HDBAD').AsString;
-                        if (Trim(FieldByName('HDMEAN').AsString) <> '') then begin
-                           n1 := GetFloat(FieldByName('HDMEAN').AsString);
-                           n2 := GetFloat(spec_hd);
-	                        Params.ParamByName('HDDIV').AsString := FloatToStr(  Round(100*Abs(n1-n2))/100 );
-                        end else
-                           Params.ParamByName('HDDIV').AsString := '-';
+						// find product specifications
+						Close;
+                  SQL.Text:='SELECT * FROM products_finished WHERE DATE(end) = "3000-01-01" AND name="'+spec_name+'"';
+						Open;
 
-   							Params.ParamByName('CIRMAX').AsString := FieldByName('CIRMAX').AsString;
-                     	Params.ParamByName('CIRMIN').AsString := FieldByName('CIRMIN').AsString;
-   	                  Params.ParamByName('CIRMEAN').AsString := FieldByName('CIRMEAN').AsString;
-      	               Params.ParamByName('CIRSD').AsString := FieldByName('CIRSD').AsString;
-         	            Params.ParamByName('CIRCV').AsString := FieldByName('CIRCV').AsString;
-            	         Params.ParamByName('CIRCPK').AsString := FieldByName('CIRCPK').AsString;
-               	      Params.ParamByName('CIRBAD').AsString := FieldByName('CIRBAD').AsString;
-                        if (Trim(FieldByName('CIRMEAN').AsString) <> '') then begin
-                           n1 := GetFloat(FieldByName('CIRMEAN').AsString);
-                           n2 := GetFloat(spec_circ);
-	                        Params.ParamByName('CIRDIV').AsString := FloatToStr( Round(100*Abs(n1-n2))/100 );
-                        end else
-                           Params.ParamByName('CIRDIV').AsString := '-';
+						spec_hd := DataModule1.SQLQuery1.FieldByName('hd').AsString;
+						spec_circ := DataModule1.SQLQuery1.FieldByName('circ').AsString;
+						spec_len := DataModule1.SQLQuery1.FieldByName('len').AsString;
+						spec_pd := DataModule1.SQLQuery1.FieldByName('pd').AsString;
+						spec_vent := DataModule1.SQLQuery1.FieldByName('vent').AsString;
+						spec_weight := DataModule1.SQLQuery1.FieldByName('weight').AsString;
 
-                  	   Params.ParamByName('LENMAX').AsString := FieldByName('LENMAX').AsString;
-                     	Params.ParamByName('LENMIN').AsString := FieldByName('LENMIN').AsString;
-   	                  Params.ParamByName('LENMEAN').AsString := FieldByName('LENMEAN').AsString;
-      	               Params.ParamByName('LENSD').AsString := FieldByName('LENSD').AsString;
-         	            Params.ParamByName('LENCV').AsString := FieldByName('LENCV').AsString;
-            	         Params.ParamByName('LENCPK').AsString := FieldByName('LENCPK').AsString;
-               	      Params.ParamByName('LENBAD').AsString := FieldByName('LENBAD').AsString;
-                        if (Trim(FieldByName('LENMEAN').AsString) <> '') then begin
-                           n1 := GetFloat(FieldByName('LENMEAN').AsString);
-                           n2 := GetFloat(spec_len);
-	                        Params.ParamByName('LENDIV').AsString := FloatToStr( Round(100*Abs(n1-n2))/100 );
-                        end else
-                           Params.ParamByName('LENDIV').AsString := '-';
+						MeasFormat := ':DATE, :SHIFT, :ORIGIN, :PH, :ITEMS, :JTH, '+
+											':HDMAX, :HDMIN, :HDMEAN, :HDSD, :HDCV, :HDCPK, :HDBAD, :HDDIV, '+
+											':CIRMAX, :CIRMIN, :CIRMEAN, :CIRSD, :CIRCV, :CIRCPK, :CIRBAD, :CIRDIV, '+
+											':LENMAX, :LENMIN, :LENMEAN, :LENSD, :LENCV, :LENCPK, :LENBAD, :LENDIV, '+
+											':PDOMAX, :PDOMIN, :PDOMEAN, :PDOSD, :PDOCV, :PDOCPK, :PDOBAD, :PDODIV, '+
+											':VMAX, :VMIN, :VMEAN, :VSD, :VCV, :VCPK, :VBAD, :VDIV, '+
+											':WGMAX, :WGMIN, :WGMEAN, :WGSD, :WGCV, :WGCPK, :WGBAD, :WGDIV, :YPBH';
+						SQL.Text:='INSERT INTO cigaret(`date`, `shift`, `origin`, `product`, `bunching_m`, `packing_m`, `max_hd`, `min_hd`, '+
+										'`avg_hd`, `dev_hd`, `var_hd`, `cpk_hd`, `out_hd`, `div_hd`, `max_circum`, `min_circum`, `avg_circum`, `dev_circum`, `var_circum`, '+
+										'`cpk_circum`, `out_circum`, `div_circum`, `max_len`, `min_len`, `avg_len`, `dev_len`, `var_len`, `cpk_len`, `out_len`, `div_len`, '+
+										'`max_pd`, `min_pd`, `avg_pd`, `dev_pd`, `var_pd`, `cpk_pd`, `out_pd`, `div_pd`, `max_vent`, `min_vent`, `avg_vent`, `dev_vent`, '+
+										'`var_vent`, `cpk_vent`, `out_vent`, `div_vent`, `max_weight`, `min_weight`, `avg_weight`, `dev_weight`, `var_weight`, `cpk_weight`, '+
+										'`out_weight`, `div_weight`, `YPBH`) '+
+										'VALUES ('+MeasFormat+')';
+						Params.ParamByName('DATE').AsString := ConvertDate(ctdata1.GetField('DATE', recordnr)) +' '+ ctdata1.GetField('TIME', recordnr);
+						Params.ParamByName('SHIFT').AsString := GetShift(ctdata1.GetField('TIME', recordnr));
+						Params.ParamByName('ORIGIN').AsString := Edit2.Text;
+						Params.ParamByName('PH').AsString := ctdata1.GetField('PH', recordnr);
+						Params.ParamByName('ITEMS').AsString := ctdata1.GetField('ITEMS', recordnr);
+						Params.ParamByName('JTH').AsString := ctdata1.GetField('JTH', recordnr);
 
-                  	   Params.ParamByName('PDOMAX').AsString := FieldByName('PDOMAX').AsString;
-                     	Params.ParamByName('PDOMIN').AsString := FieldByName('PDOMIN').AsString;
-   	                  Params.ParamByName('PDOMEAN').AsString := FieldByName('PDOMEAN').AsString;
-      	               Params.ParamByName('PDOSD').AsString := FieldByName('PDOSD').AsString;
-         	            Params.ParamByName('PDOCV').AsString := FieldByName('PDOCV').AsString;
-            	         Params.ParamByName('PDOCPK').AsString := FieldByName('PDOCPK').AsString;
-               	      Params.ParamByName('PDOBAD').AsString := FieldByName('PDOBAD').AsString;
-                        if (Trim(FieldByName('PDOMEAN').AsString) <> '') then begin
-                           n1 := GetFloat(FieldByName('PDOMEAN').AsString);
-                           n2 := GetFloat(spec_pd);
-	                        Params.ParamByName('PDODIV').AsString := FloatToStr( Round(100*Abs(n1-n2))/100 );
-                        end else
-                           Params.ParamByName('PDODIV').AsString := '-';
+						Params.ParamByName('HDMAX').AsString := ctdata1.GetField('HDMAX', recordnr);
+						Params.ParamByName('HDMIN').AsString := ctdata1.GetField('HDMIN', recordnr);
+						Params.ParamByName('HDMEAN').AsString := ctdata1.GetField('HDMEAN', recordnr);
+						Params.ParamByName('HDSD').AsString := ctdata1.GetField('HDSD', recordnr);
+						Params.ParamByName('HDCV').AsString := ctdata1.GetField('HDCV', recordnr);
+						Params.ParamByName('HDCPK').AsString := ctdata1.GetField('HDCPK', recordnr);
+						Params.ParamByName('HDBAD').AsString := ctdata1.GetField('HDBAD', recordnr);
+						if (Trim(ctdata1.GetField('HDMEAN', recordnr)) <> '') then begin
+							n1 := GetFloat(ctdata1.GetField('HDMEAN', recordnr));
+							n2 := GetFloat(spec_hd);
+							Params.ParamByName('HDDIV').AsString := FloatToStr(  Round(100*Abs(n1-n2))/100 );
+						end else
+							Params.ParamByName('HDDIV').AsString := '-';
 
-                  	   Params.ParamByName('VMAX').AsString := FieldByName('VMAX').AsString;
-                     	Params.ParamByName('VMIN').AsString := FieldByName('VMIN').AsString;
-   	                  Params.ParamByName('VMEAN').AsString := FieldByName('VMEAN').AsString;
-      	               Params.ParamByName('VSD').AsString := FieldByName('VSD').AsString;
-         	            Params.ParamByName('VCV').AsString := FieldByName('VCV').AsString;
-            	         Params.ParamByName('VCPK').AsString := FieldByName('VCPK').AsString;
-               	      Params.ParamByName('VBAD').AsString := FieldByName('VBAD').AsString;
-                        if (Trim(FieldByName('VMEAN').AsString) <> '') then begin
-                           n1 := GetFloat(FieldByName('VMEAN').AsString);
-                           n2 := GetFloat(spec_vent);
-	                        Params.ParamByName('VDIV').AsString := FloatToStr( Round(100*Abs(n1-n2))/100 );
-                        end else
-                           Params.ParamByName('VDIV').AsString := '-';
+                  Params.ParamByName('CIRMAX').AsString := ctdata1.GetField('CIRMAX', recordnr);
+						Params.ParamByName('CIRMIN').AsString := ctdata1.GetField('CIRMIN', recordnr);
+						Params.ParamByName('CIRMEAN').AsString := ctdata1.GetField('CIRMEAN', recordnr);
+						Params.ParamByName('CIRSD').AsString := ctdata1.GetField('CIRSD', recordnr);
+						Params.ParamByName('CIRCV').AsString := ctdata1.GetField('CIRCV', recordnr);
+						Params.ParamByName('CIRCPK').AsString := ctdata1.GetField('CIRCPK', recordnr);
+						Params.ParamByName('CIRBAD').AsString := ctdata1.GetField('CIRBAD', recordnr);
+						if (Trim(ctdata1.GetField('CIRMEAN', recordnr)) <> '') then begin
+							n1 := GetFloat(ctdata1.GetField('CIRMEAN', recordnr));
+							n2 := GetFloat(spec_circ);
+							Params.ParamByName('CIRDIV').AsString := FloatToStr( Round(100*Abs(n1-n2))/100 );
+						end else
+							Params.ParamByName('CIRDIV').AsString := '-';
 
-                  	   Params.ParamByName('WGMAX').AsString := FieldByName('WGMAX').AsString;
-                     	Params.ParamByName('WGMIN').AsString := FieldByName('WGMIN').AsString;
-   	                  Params.ParamByName('WGMEAN').AsString := FieldByName('WGMEAN').AsString;
-      	               Params.ParamByName('WGSD').AsString := FieldByName('WGSD').AsString;
-         	            Params.ParamByName('WGCV').AsString := FieldByName('WGCV').AsString;
-            	         Params.ParamByName('WGCPK').AsString := FieldByName('WGCPK').AsString;
-               	      Params.ParamByName('WGBAD').AsString := FieldByName('WGBAD').AsString;
-                        if (Trim(FieldByName('WGMEAN').AsString) <> '') then begin
-                           n1 := GetFloat(FieldByName('WGMEAN').AsString);
-                           n2 := GetFloat(spec_weight);
-	                        Params.ParamByName('WGDIV').AsString := FloatToStr( Round(100*Abs(n1-n2))/100 );
-                        end else
-                           Params.ParamByName('WGDIV').AsString := '-';
+                  Params.ParamByName('LENMAX').AsString := ctdata1.GetField('LENMAX', recordnr);
+						Params.ParamByName('LENMIN').AsString := ctdata1.GetField('LENMIN', recordnr);
+						Params.ParamByName('LENMEAN').AsString := ctdata1.GetField('LENMEAN', recordnr);
+						Params.ParamByName('LENSD').AsString := ctdata1.GetField('LENSD', recordnr);
+						Params.ParamByName('LENCV').AsString := ctdata1.GetField('LENCV', recordnr);
+						Params.ParamByName('LENCPK').AsString := ctdata1.GetField('LENCPK', recordnr);
+						Params.ParamByName('LENBAD').AsString := ctdata1.GetField('LENBAD', recordnr);
+						if (Trim(ctdata1.GetField('LENMEAN', recordnr)) <> '') then begin
+							n1 := GetFloat(ctdata1.GetField('LENMEAN', recordnr));
+							n2 := GetFloat(spec_len);
+							Params.ParamByName('LENDIV').AsString := FloatToStr( Round(100*Abs(n1-n2))/100 );
+						end else
+							Params.ParamByName('LENDIV').AsString := '-';
 
-                  	   Params.ParamByName('YPBH').AsString := YPBH;
-   	               end;
-      	            ExecSQL;
-         	         DataModule1.SQLTransaction1.Commit;
-            	   end;
+						Params.ParamByName('PDOMAX').AsString := ctdata1.GetField('PDOMAX', recordnr);
+						Params.ParamByName('PDOMIN').AsString := ctdata1.GetField('PDOMIN', recordnr);
+						Params.ParamByName('PDOMEAN').AsString := ctdata1.GetField('PDOMEAN', recordnr);
+						Params.ParamByName('PDOSD').AsString := ctdata1.GetField('PDOSD', recordnr);
+						Params.ParamByName('PDOCV').AsString := ctdata1.GetField('PDOCV', recordnr);
+						Params.ParamByName('PDOCPK').AsString := ctdata1.GetField('PDOCPK', recordnr);
+						Params.ParamByName('PDOBAD').AsString := ctdata1.GetField('PDOBAD', recordnr);
+						if (Trim(ctdata1.GetField('PDOMEAN', recordnr)) <> '') then begin
+							n1 := GetFloat(ctdata1.GetField('PDOMEAN', recordnr));
+							n2 := GetFloat(spec_pd);
+							Params.ParamByName('PDODIV').AsString := FloatToStr( Round(100*Abs(n1-n2))/100 );
+						end else
+							Params.ParamByName('PDODIV').AsString := '-';
+
+						Params.ParamByName('VMAX').AsString := ctdata1.GetField('VMAX', recordnr);
+						Params.ParamByName('VMIN').AsString := ctdata1.GetField('VMIN', recordnr);
+						Params.ParamByName('VMEAN').AsString := ctdata1.GetField('VMEAN', recordnr);
+						Params.ParamByName('VSD').AsString := ctdata1.GetField('VSD', recordnr);
+						Params.ParamByName('VCV').AsString := ctdata1.GetField('VCV', recordnr);
+						Params.ParamByName('VCPK').AsString := ctdata1.GetField('VCPK', recordnr);
+						Params.ParamByName('VBAD').AsString := ctdata1.GetField('VBAD', recordnr);
+						if (Trim(ctdata1.GetField('VMEAN', recordnr)) <> '') then begin
+							n1 := GetFloat(ctdata1.GetField('VMEAN', recordnr));
+							n2 := GetFloat(spec_vent);
+							Params.ParamByName('VDIV').AsString := FloatToStr( Round(100*Abs(n1-n2))/100 );
+						end else
+							Params.ParamByName('VDIV').AsString := '-';
+
+						Params.ParamByName('WGMAX').AsString := ctdata1.GetField('WGMAX', recordnr);
+						Params.ParamByName('WGMIN').AsString := ctdata1.GetField('WGMIN', recordnr);
+						Params.ParamByName('WGMEAN').AsString := ctdata1.GetField('WGMEAN', recordnr);
+						Params.ParamByName('WGSD').AsString := ctdata1.GetField('VMEAN', recordnr);
+						Params.ParamByName('WGCV').AsString := FieldByName('WGSD').AsString;
+						Params.ParamByName('WGCPK').AsString := ctdata1.GetField('WGCPK', recordnr);
+						Params.ParamByName('WGBAD').AsString := ctdata1.GetField('WGBAD', recordnr);
+						if (Trim(ctdata1.GetField('WGMEAN', recordnr)) <> '') then begin
+							n1 := GetFloat(ctdata1.GetField('WGMEAN', recordnr));
+							n2 := GetFloat(spec_weight);
+							Params.ParamByName('WGDIV').AsString := FloatToStr( Round(100*Abs(n1-n2))/100 );
+						end else
+							Params.ParamByName('WGDIV').AsString := '-';
+
+						Params.ParamByName('YPBH').AsString := YPBH;
+
+						ExecSQL;
+						DataModule1.SQLTransaction1.Commit;
+
    	         end;
 
-               // store the stick numbers that are already stored
+               // get the stick numbers that are already stored
                with DataModule1.SQLQuery1 do begin
                   Close;
             		SQL.Text:='SELECT * FROM weight WHERE master="'+YPBH+'"';		// check to see if the details are already stored (in any detail table)
@@ -924,10 +722,11 @@ begin
       				end;
                end;
 
-   				Dbf3.First;   // loop de details af
-   				while not Dbf3.Eof do begin
-   					if (Edit2.Caption+'-'+DataSource3.Dataset.FieldByName('YPBH').AsString) = YPBH then begin  // check only the details of the current master
-   						nr := DataSource3.Dataset.FieldByName('NO').AsString;
+   				// loop de details af
+               detailnr := 1;
+   				while detailnr < ctdata2.numrecs do begin
+   					if (Edit2.Caption+'-'+ctdata2.GetField('YPBH', detailnr)) = YPBH then begin  // check only the details of the current master
+   						nr := ctdata2.GetField('NO', detailnr);
    						if Pos(nr, sticks) = 0 then begin	// store the stick that was not found on the server
                         // create a new row
                         SQL.Text := 'INSERT INTO rows (`id`) VALUES(null)';
@@ -943,7 +742,7 @@ begin
                         SQL.Text:='INSERT INTO weight(`stick`, `master`, `value`, `row`) VALUES ('+MeasFormat+')';
                         Params.ParamByName('STICK').AsString := nr;
             	         Params.ParamByName('MASTER').AsString := YPBH;
-               	      Params.ParamByName('VALUE').AsString := DataSource3.Dataset.FieldByName('WG').AsString;
+               	      Params.ParamByName('VALUE').AsString := ctdata2.GetField('WG', detailnr);
                         Params.ParamByName('row').AsString := row;
                         ExecSQL;
    	      	         DataModule1.SQLTransaction1.Commit;
@@ -951,56 +750,54 @@ begin
                         SQL.Text:='INSERT INTO circumference(`stick`, `master`, `value`, `row`) VALUES ('+MeasFormat+')';
                         Params.ParamByName('STICK').AsString := nr;
             	         Params.ParamByName('MASTER').AsString := YPBH;
-               	      Params.ParamByName('VALUE').AsString := DataSource3.Dataset.FieldByName('CIR').AsString;
-                        Params.ParamByName('row').AsString := row;
+               	      Params.ParamByName('VALUE').AsString := ctdata2.GetField('CIR', detailnr);
+                        Params.ParamByName('ROW').AsString := row;
                         ExecSQL;
    	      	         DataModule1.SQLTransaction1.Commit;
 
                         SQL.Text:='INSERT INTO length(`stick`, `master`, `value`, `row`) VALUES ('+MeasFormat+')';
                         Params.ParamByName('STICK').AsString := nr;
             	         Params.ParamByName('MASTER').AsString := YPBH;
-               	      Params.ParamByName('VALUE').AsString := DataSource3.Dataset.FieldByName('LEN').AsString;
-                        Params.ParamByName('row').AsString := row;
+               	      Params.ParamByName('VALUE').AsString := ctdata2.GetField('LEN', detailnr);
+                        Params.ParamByName('ROW').AsString := row;
                         ExecSQL;
    	      	         DataModule1.SQLTransaction1.Commit;
 
                         SQL.Text:='INSERT INTO pd (`stick`, `master`, `value`, `row`) VALUES ('+MeasFormat+')';
                         Params.ParamByName('STICK').AsString := nr;
             	         Params.ParamByName('MASTER').AsString := YPBH;
-               	      Params.ParamByName('VALUE').AsString := DataSource3.Dataset.FieldByName('PDO').AsString;
-                        Params.ParamByName('row').AsString := row;
+               	      Params.ParamByName('VALUE').AsString := ctdata2.GetField('PDO', detailnr);
+                        Params.ParamByName('ROW').AsString := row;
                         ExecSQL;
    	      	         DataModule1.SQLTransaction1.Commit;
 
                         SQL.Text:='INSERT INTO ventilation(`stick`, `master`, `value`, `row`) VALUES ('+MeasFormat+')';
                         Params.ParamByName('STICK').AsString := nr;
             	         Params.ParamByName('MASTER').AsString := YPBH;
-               	      Params.ParamByName('VALUE').AsString := DataSource3.Dataset.FieldByName('V').AsString;
-                        Params.ParamByName('row').AsString := row;
+               	      Params.ParamByName('VALUE').AsString := ctdata2.GetField('V', detailnr);
+                        Params.ParamByName('ROW').AsString := row;
                         ExecSQL;
    	      	         DataModule1.SQLTransaction1.Commit;
 
                         SQL.Text:='INSERT INTO hardness(`stick`, `master`, `value`, `row`) VALUES ('+MeasFormat+')';
                         Params.ParamByName('STICK').AsString := nr;
             	         Params.ParamByName('MASTER').AsString := YPBH;
-               	      Params.ParamByName('VALUE').AsString := DataSource3.Dataset.FieldByName('HD').AsString;
-                        Params.ParamByName('row').AsString := row;
+               	      Params.ParamByName('VALUE').AsString := ctdata2.GetField('HD', detailnr);
+                        Params.ParamByName('ROW').AsString := row;
                         ExecSQL;
    	      	         DataModule1.SQLTransaction1.Commit;
+                        {  }
                   	end;
-   					end;
-   					Dbf3.Next; 	// next detail record
+                  end;
+   					detailnr := detailnr+1; 	// next detail record
    				end;
-      	      Dbf2.Prior;	// prior master record
+      	      recordnr := recordnr-1;	// prior master record
    	      end;
-            Finished := Dbf2.Bof;
+            Finished := (recordnr = 0);
       	end;
       end;
 
       DataModule1.DisConnect(Sender);	// disconnect the server
-   	Dbf3.Close; 					// close the dbase tables
-   	Dbf2.Close;
-   	Dbf1.Close;
      	Timer1.Enabled := true;
 
    end;

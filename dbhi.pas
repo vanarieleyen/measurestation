@@ -5,7 +5,7 @@ unit dbhi;
 interface
 
 uses
-  Classes, SysUtils, LazLogger, dblo, iconvenc, math;
+  dblo, Classes, SysUtils, LazLoggerDummy, math, LConvEncoding;
 
 (******************************************************************************
 High level DBase file handling
@@ -22,7 +22,7 @@ database.Open(FileName);
 GetField(fieldname; recno)	: returns content of field
 GetFieldNr(fieldnr; recno) : returns content of field
 SetField(fieldname; recno; value) : updates the value in a field (disk + memory)
-Locate(fieldname; needle) : returns location or 0 when not found
+Locate(fieldname; needle) : returns true/false and fills filter-array with the found records
 Delete(recno) : deletes a record (sets the deleteflag)
 Append() : append an empty record (disk + memory)
 
@@ -40,9 +40,6 @@ type
       length: integer;
    end;
 
-	Tvalues = array of string;  	// field contents in one long string
-   TFields = array of TRecord;
-
    TDBFdatabase = class
 		private
          procedure SetFieldNr(nr: integer; recno: integer; value: string);
@@ -52,17 +49,19 @@ type
          HeadLen:	integer;
          RecLen: integer;
          DateOfUpdate: string;
-        	fieldval: Tvalues;
-			fielddev: TFields;
+        	fieldval: array of string;  	// field contents in one long string
+			fielddev: array of TRecord;
+         filter: array of integer;		// result of a locate call (the search result)
          DBASE : dbfRecord;
          procedure Open(text: string);
          procedure Close();
          function GetField(name: string; recno: integer): string;
          function GetFieldNr(nr: integer; recno: integer): string;
-         function Locate(field: string; needle: string): integer;
+         function Locate(field: string; needle: string): boolean;
          procedure SetField(name: string; recno: integer; value: string);
          procedure Delete(recno: integer);
          procedure Append();
+         procedure Empty();
    end;
 
 implementation
@@ -96,7 +95,7 @@ begin
    r := 1;
    WHILE r <= numrecs DO BEGIN       // store all records in memory
    	GetDbfRecord(DBASE, r);
-      deleted := (DBASE.CurRecord^[DBASE.Fields^[1].Off-1] = Byte('*'));
+      deleted := false; //(DBASE.CurRecord^[DBASE.Fields^[1].Off-1] = Byte('*')); 	// dont use the deleted flag yet
       if not deleted then begin
 	    	FOR i := 0 TO numfields-1 DO BEGIN
 				SetString(s, @DBASE.CurRecord^[DBASE.Fields^[i+1].Off] , DBASE.Fields^[i+1].Len);
@@ -126,7 +125,7 @@ var
 	s, str: string;
 begin
    s := copy( fieldval[nr], (recno-1)*fielddev[nr].length+1, fielddev[nr].length);
-   IConvert(s,str,'gb18030','utf8');
+   str := CP936ToUTF8(s);
    Result := str;
 end;
 
@@ -150,7 +149,8 @@ var
    s: string;
    i: integer;
 begin
-   IConvert(value, str, 'utf8','gb18030');	// convert utf8 string to dbase format (gb18030)
+   // convert utf8 string to dbase format (gb18030)
+   str := UTF8ToCP936(value);
 
 	// fill remaining with spaces
    for i:=fielddev[nr].length-Length(str) downto 1 do
@@ -169,22 +169,46 @@ end;
 
 procedure TDBFdatabase.Close();
 begin
-   CloseDbf(DBASE);
+	setlength(fieldval, 0);
+	setlength(fielddev, 0);
+   setlength(filter, 0);
+	CloseDbf(DBASE);
 end;
 
+// remove all records from the database, leaves the structure untouched
+procedure TDBFdatabase.Empty();
+begin
+	OpenDbf(DBASE);
+   CreateDbf(DBASE, DBASE.FileName, DBASE.NumFields, DBASE.Fields);
+	setlength(fieldval, 0);
+	setlength(fielddev, 0);
+   setlength(filter, 0);
+	CloseDbf(DBASE);
+end;
 
 // locate record, returns index or 0 when not found
-function TDBFdatabase.Locate(field: string; needle: string): integer;
+function TDBFdatabase.Locate(field: string; needle: string): boolean;
 var
-   i: integer;
-	str: string;
+   i, found: integer;
+	str, rec: string;
 begin
-   for i := 0 to numfields-1 do begin
- 	 	if fielddev[i].name = field then
-   	  	break;
+   for i := 0 to numfields-1 do						// get field number
+ 	 	if fielddev[i].name = field then	break;
+
+   str := UTF8ToCP936(needle);
+
+   SetLength(filter, 0);
+
+   found := 0;
+	while found <= numrecs do begin
+      rec := copy(fieldval[i], found*fielddev[i].length+1, fielddev[i].length);
+		if Pos(str, rec) > 0 then begin
+      	SetLength(filter, Length(filter)+1);
+			filter[Length(filter)-1] := found+1;
+      end;
+      found := found + 1;
    end;
-   IConvert(needle, str, 'utf8','gb18030');
-   Result := ceil(Pos(str, fieldval[i])/fielddev[i].length);
+	Result := (Length(filter) > 0);
 end;
 
 // delete a record

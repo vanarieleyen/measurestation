@@ -5,7 +5,7 @@ unit Unit2;
 interface
 
 uses
-  Classes, SysUtils, sqldb, db, mysql56conn, FileUtil, LazLogger, Forms;
+  Classes, SysUtils, sqldb, db, mysql56conn, FileUtil, LazLoggerDummy, Forms;
 
 type
 
