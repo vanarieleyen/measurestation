@@ -27,11 +27,11 @@ object Form1: TForm1
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Data'
-      ClientHeight = 583
+      ClientHeight = 610
       ClientWidth = 910
       object StringGrid1: TStringGrid
         Left = 0
-        Height = 213
+        Height = 240
         Top = 320
         Width = 910
         Align = alBottom
@@ -90,7 +90,7 @@ object Form1: TForm1
       object Panel1: TPanel
         Left = 0
         Height = 50
-        Top = 533
+        Top = 560
         Width = 910
         Align = alBottom
         ClientHeight = 50
@@ -133,7 +133,7 @@ object Form1: TForm1
     object TabSheet6: TTabSheet
       Hint = 'checksum of the specs on the server'
       Caption = 'Setup'
-      ClientHeight = 583
+      ClientHeight = 610
       ClientWidth = 910
       object Label7: TLabel
         Left = 34

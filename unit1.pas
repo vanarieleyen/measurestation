@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, DateUtils, sqldb, Forms,
   Controls, Dialogs, ComCtrls, IniPropStorage, StdCtrls, EditBtn,
   ExtCtrls, Buttons, Grids, PopupNotifier, ExtDlgs, Types, Math,
-  LazLoggerDummy, dblo, dbhi;
+  LazLoggerDummy, dbhi;
 
 type
 
@@ -392,6 +392,7 @@ begin
             DebugLn('force update');
 
             cfg.Empty();  // delete all records from the dbase table
+            DebugLn('after delete');
             recordnr := 0;
 
 				Close;
@@ -422,7 +423,9 @@ begin
                if (FieldByName('hd_max').AsString='') then spec_hd_max:='0' else spec_hd_max:=FieldByName('hd_max').AsString;
 
                // add the spec to the empty file
+               DebugLn('before append');
                cfg.Append();
+               DebugLn('append');
                recordnr := recordnr+1;
                cfg.SetField('PH', recordnr, spec_name);
                cfg.SetField('ITEMS', recordnr, spec_pid);
@@ -556,7 +559,7 @@ begin
    end;
 
    fs := FileSize(IncludeTrailingPathDelimiter(DirectoryEdit1.Text)+'CtData1.DBF');
-   LastSize := fs;
+   // LastSize := fs; // prevent updates
 
    DebugLn('size database station = '+dbgs(fs));
    DebugLn('last size = '+dbgs(LastSize));
@@ -692,8 +695,8 @@ begin
 						Params.ParamByName('WGMAX').AsString := ctdata1.GetField('WGMAX', recordnr);
 						Params.ParamByName('WGMIN').AsString := ctdata1.GetField('WGMIN', recordnr);
 						Params.ParamByName('WGMEAN').AsString := ctdata1.GetField('WGMEAN', recordnr);
-						Params.ParamByName('WGSD').AsString := ctdata1.GetField('VMEAN', recordnr);
-						Params.ParamByName('WGCV').AsString := FieldByName('WGSD').AsString;
+						Params.ParamByName('WGSD').AsString := ctdata1.GetField('WGSD', recordnr);
+						Params.ParamByName('WGCV').AsString := ctdata1.GetField('WGCV', recordnr);
 						Params.ParamByName('WGCPK').AsString := ctdata1.GetField('WGCPK', recordnr);
 						Params.ParamByName('WGBAD').AsString := ctdata1.GetField('WGBAD', recordnr);
 						if (Trim(ctdata1.GetField('WGMEAN', recordnr)) <> '') then begin

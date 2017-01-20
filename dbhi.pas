@@ -164,7 +164,7 @@ begin
    GetDbfRecord(DBASE, recno);
    Move( str[1], DBASE.CurRecord^[DBASE.Fields^[nr+1].Off], fielddev[nr].length );
    PutDbfRecord(DBASE, recno);
-
+   CloseDbf(DBASE);
 end;
 
 procedure TDBFdatabase.Close();
@@ -180,10 +180,7 @@ procedure TDBFdatabase.Empty();
 begin
 	OpenDbf(DBASE);
    CreateDbf(DBASE, DBASE.FileName, DBASE.NumFields, DBASE.Fields);
-	setlength(fieldval, 0);
-	setlength(fielddev, 0);
-   setlength(filter, 0);
-	CloseDbf(DBASE);
+   CloseDbf(DBASE);
 end;
 
 // locate record, returns index or 0 when not found

@@ -599,6 +599,7 @@ VAR
       FD : _FieldDescType ABSOLUTE F;
     BEGIN                   { MakeOneFieldDesc }
       Move(Field.Name[1],FD,Ord(Field.Name[0]));
+      //DebugLn(Field.Name);
       FD[11] := Ord(Field.Typ);
       FD[16] := Field.Len;
       IF Field.Typ <> 'N' THEN Field.Dec := 0;
@@ -613,6 +614,7 @@ VAR
     D.RecLen := 1;
     FOR i := 1 TO D.NumFields DO
     BEGIN
+      //DebugLn(flds^[i].Name);
       MakeOneFieldDesc(tHeader[i*32],flds^[i]);
       IF dbfError <> 0 THEN Exit;
     END;
