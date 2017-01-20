@@ -60,6 +60,7 @@ begin
 			StatusBar1.SimpleText:='Server not found';
 		end;
 	end;
+   Application.ProcessMessages;
 end;
 
 // disconnect the server
@@ -81,6 +82,7 @@ begin
 			StatusBar1.SimpleText:='Server not found';
 		end;
 	end;
+   Application.ProcessMessages;
 end;
 
 end.

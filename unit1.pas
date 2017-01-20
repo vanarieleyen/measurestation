@@ -29,6 +29,7 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label7: TLabel;
+    Memo1: TMemo;
     PageControl1: TPageControl;
     Panel1: TPanel;
     StatusBar1: TStatusBar;
@@ -147,6 +148,9 @@ var
 	posError:integer;
 begin
    DebugLn(s);
+   Memo1.Append(s);
+   Application.ProcessMessages;
+
 	val(s, dummyNumber, posError);
    if (posError=0) then
 		result := StrToFloat(s)
@@ -382,17 +386,24 @@ begin
 
    // sync the specifications with the server
    DebugLn('connecting');
+   Memo1.Append('connecting');
+   Application.ProcessMessages;
+
    DataModule1.Connect(Sender);		// connect to the main server
-   DebugLn('after connect');
 
    if DataModule1.MySQL56Connection1.Connected then begin
    	with DataModule1.SQLQuery1 do begin
          DebugLn('send query');
+
+         Memo1.Append('send query');
+		   Application.ProcessMessages;
+
          Close;
    		SQL.Text:='SELECT force_update FROM stations WHERE name='+Edit2.Text;		// check if there is a force update specs on the server
          Open;
          if (FieldByName('force_update').AsInteger > 0) then begin
-            DebugLn('force update');
+            Memo1.Append('Force Specifications Update');
+			   Application.ProcessMessages;
 
             cfg.Empty();  // delete all records from the dbase table
             recordnr := 0;
@@ -474,6 +485,9 @@ begin
    		Open;
 
          if (Edit3.Text <> FieldByName('Checksum').AsString) then begin
+
+            Memo1.Append('Update specifications');
+   			Application.ProcessMessages;
 
             Edit3.Text := FieldByName('Checksum').AsString;		// store the new checksum
 
@@ -565,7 +579,10 @@ begin
 
    //Finished := true;
    if ((fs <> LastSize) OR NOT Finished) then begin
-      DebugLn('start updating server');
+
+      Memo1.Append('send new data to the server');
+   	Application.ProcessMessages;
+
       Form1.Caption := 'Last Update at: '+DateTimeToStr(Now);
       Form1.Caption := intToStr(fs);
    	LastSize := fs;
@@ -801,6 +818,12 @@ begin
 
    if DataModule1.MySQL56Connection1.Connected then
       DataModule1.DisConnect(Sender);	// disconnect the server
+
+   Memo1.Append('leaving update-loop');
+   Application.ProcessMessages;
+
+   if (memo1.Lines.Count > 100) then
+   	Memo1.Lines.Clear;
 
    Timer1.Enabled := true;
 end;
