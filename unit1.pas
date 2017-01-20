@@ -182,6 +182,8 @@ procedure TForm1.Button1Click(Sender: TObject);
 var
    i, r: integer;
 begin
+   DebugLn('browse');
+
   // display specs
   StringGrid2.ColCount := cfg.NumFields;
   StringGrid2.RowCount := cfg.NumRecs+1;
@@ -382,6 +384,7 @@ begin
    DebugLn('connecting');
    DataModule1.Connect(Sender);		// connect to the main server
    DebugLn('after connect');
+
    if DataModule1.MySQL56Connection1.Connected then begin
    	with DataModule1.SQLQuery1 do begin
          DebugLn('send query');
@@ -392,7 +395,6 @@ begin
             DebugLn('force update');
 
             cfg.Empty();  // delete all records from the dbase table
-            DebugLn('after delete');
             recordnr := 0;
 
 				Close;
@@ -423,9 +425,7 @@ begin
                if (FieldByName('hd_max').AsString='') then spec_hd_max:='0' else spec_hd_max:=FieldByName('hd_max').AsString;
 
                // add the spec to the empty file
-               DebugLn('before append');
                cfg.Append();
-               DebugLn('append');
                recordnr := recordnr+1;
                cfg.SetField('PH', recordnr, spec_name);
                cfg.SetField('ITEMS', recordnr, spec_pid);
@@ -464,7 +464,6 @@ begin
                Next;
             end;
 
-            DebugLn('reset force update');
             SQL.Text:='UPDATE stations SET force_update=0, date=NOW() WHERE name='+Edit2.Text;
             ExecSQL;
 	         DataModule1.SQLTransaction1.Commit;
@@ -559,18 +558,17 @@ begin
    end;
 
    fs := FileSize(IncludeTrailingPathDelimiter(DirectoryEdit1.Text)+'CtData1.DBF');
-   // LastSize := fs; // prevent updates
 
-   DebugLn('size database station = '+dbgs(fs));
-   DebugLn('last size = '+dbgs(LastSize));
-   DebugLn('Finished = '+dbgs(Finished));
-	if ((fs <> LastSize) OR NOT Finished) then begin
+   //DebugLn('size database station = '+dbgs(fs));
+   //DebugLn('last size = '+dbgs(LastSize));
+   //DebugLn('Finished = '+dbgs(Finished));
+
+   //Finished := true;
+   if ((fs <> LastSize) OR NOT Finished) then begin
       DebugLn('start updating server');
       Form1.Caption := 'Last Update at: '+DateTimeToStr(Now);
       Form1.Caption := intToStr(fs);
    	LastSize := fs;
-
-   	DataModule1.Connect(Sender);		// connect to server
 
       if DataModule1.MySQL56Connection1.Connected then begin
       	with DataModule1.SQLQuery1 do begin
@@ -799,12 +797,12 @@ begin
             Finished := (recordnr = 0);
       	end;
       end;
-
-      DataModule1.DisConnect(Sender);	// disconnect the server
-     	Timer1.Enabled := true;
-
    end;
 
+   if DataModule1.MySQL56Connection1.Connected then
+      DataModule1.DisConnect(Sender);	// disconnect the server
+
+   Timer1.Enabled := true;
 end;
 
 // enable the update timer (after browsing)

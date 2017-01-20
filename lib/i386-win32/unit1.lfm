@@ -21,9 +21,9 @@ object Form1: TForm1
     Height = 614
     Top = 0
     Width = 914
-    ActivePage = TabSheet1
+    ActivePage = TabSheet6
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Data'
@@ -31,7 +31,7 @@ object Form1: TForm1
       ClientWidth = 910
       object StringGrid1: TStringGrid
         Left = 0
-        Height = 240
+        Height = 213
         Top = 320
         Width = 910
         Align = alBottom
@@ -90,11 +90,11 @@ object Form1: TForm1
       object Panel1: TPanel
         Left = 0
         Height = 50
-        Top = 560
+        Top = 533
         Width = 910
         Align = alBottom
-        ClientHeight = 50
-        ClientWidth = 910
+        ClientHeight = 46
+        ClientWidth = 906
         TabOrder = 3
         object Button1: TButton
           Left = 16
