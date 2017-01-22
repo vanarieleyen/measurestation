@@ -14,11 +14,11 @@ object Form1: TForm1
   SessionProperties = 'DirectoryEdit1.Text;Edit1.Text;Edit2.Text;TrackBar1.Position;Edit3.Text'
   ShowHint = True
   ShowInTaskBar = stNever
-  LCLVersion = '5.7'
+  LCLVersion = '5.9'
   WindowState = wsMinimized
   object PageControl1: TPageControl
     Left = 0
-    Height = 614
+    Height = 613
     Top = 0
     Width = 914
     ActivePage = TabSheet6
@@ -27,7 +27,7 @@ object Form1: TForm1
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Data'
-      ClientHeight = 583
+      ClientHeight = 609
       ClientWidth = 910
       object StringGrid1: TStringGrid
         Left = 0
@@ -93,8 +93,8 @@ object Form1: TForm1
         Top = 533
         Width = 910
         Align = alBottom
-        ClientHeight = 50
-        ClientWidth = 910
+        ClientHeight = 46
+        ClientWidth = 906
         TabOrder = 3
         object Button1: TButton
           Left = 16
@@ -133,19 +133,19 @@ object Form1: TForm1
     object TabSheet6: TTabSheet
       Hint = 'checksum of the specs on the server'
       Caption = 'Setup'
-      ClientHeight = 583
+      ClientHeight = 581
       ClientWidth = 910
       object Label7: TLabel
         Left = 34
-        Height = 17
+        Height = 18
         Top = 40
-        Width = 43
+        Width = 44
         Caption = 'Server'
         ParentColor = False
       end
       object Edit1: TEdit
         Left = 112
-        Height = 27
+        Height = 28
         Top = 35
         Width = 152
         TabOrder = 0
@@ -153,7 +153,7 @@ object Form1: TForm1
       end
       object TrackBar1: TTrackBar
         Left = 32
-        Height = 46
+        Height = 47
         Top = 216
         Width = 368
         Max = 120
@@ -168,15 +168,15 @@ object Form1: TForm1
       end
       object Label1: TLabel
         Left = 34
-        Height = 17
+        Height = 18
         Top = 184
-        Width = 126
+        Width = 130
         Caption = 'Update Frequency:'
         ParentColor = False
       end
       object DirectoryEdit1: TDirectoryEdit
         Left = 34
-        Height = 27
+        Height = 28
         Top = 112
         Width = 391
         DialogTitle = 'Database Location'
@@ -188,9 +188,9 @@ object Form1: TForm1
       end
       object Label2: TLabel
         Left = 34
-        Height = 17
+        Height = 18
         Top = 88
-        Width = 130
+        Width = 133
         Caption = 'Database Location:'
         ParentColor = False
       end
@@ -205,7 +205,7 @@ object Form1: TForm1
       end
       object Edit2: TEdit
         Left = 152
-        Height = 27
+        Height = 28
         Top = 296
         Width = 248
         NumbersOnly = True
@@ -213,24 +213,24 @@ object Form1: TForm1
       end
       object Label4: TLabel
         Left = 40
-        Height = 17
+        Height = 18
         Top = 304
-        Width = 107
+        Width = 110
         Caption = 'Station Number'
         ParentColor = False
       end
       object Label5: TLabel
         Left = 40
-        Height = 17
+        Height = 18
         Top = 353
-        Width = 100
+        Width = 103
         Caption = 'spec checksum'
         ParentColor = False
         Visible = False
       end
       object Edit3: TEdit
         Left = 152
-        Height = 27
+        Height = 28
         Hint = 'checksum of the specs on the server'
         Top = 347
         Width = 248
@@ -238,7 +238,7 @@ object Form1: TForm1
       end
       object Memo1: TMemo
         Left = 616
-        Height = 583
+        Height = 581
         Top = 0
         Width = 294
         Align = alRight
@@ -249,8 +249,8 @@ object Form1: TForm1
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 21
-    Top = 614
+    Height = 22
+    Top = 613
     Width = 914
     Panels = <>
     ParentShowHint = False

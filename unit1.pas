@@ -65,6 +65,7 @@ type
     function ConvertDate(s: string): string;
     function GetShift(tijd: string): string;
     function GetFloat(s: string): double;
+    procedure Action(msg: string);
   end;
 
 type
@@ -106,6 +107,12 @@ begin
    cfg.Open(DirectoryEdit1.Text+PathDelim+'Cfg.DBF');
    ctdata1.Open(DirectoryEdit1.Text+PathDelim+'CtData1.DBF');
    ctdata2.Open(DirectoryEdit1.Text+PathDelim+'CtData2.DBF');
+
+  Show; // This is to show it from taskbar
+  Application.Restore; // This is to restore the whole application
+  WindowState:=wsNormal;
+  SetFocus;
+  Application.ProcessMessages;
 end;
 
 // save the settings
@@ -147,9 +154,7 @@ var
 	dummyNumber:double;
 	posError:integer;
 begin
-   DebugLn(s);
-   Memo1.Append(s);
-   Application.ProcessMessages;
+   Action({$I %Line%}+': '+s);
 
 	val(s, dummyNumber, posError);
    if (posError=0) then
@@ -385,25 +390,19 @@ begin
 //   TrayIcon1.Visible:= false;
 
    // sync the specifications with the server
-   DebugLn('connecting');
-   Memo1.Append('connecting');
-   Application.ProcessMessages;
+   Action({$I %Line%}+': '+'connecting');
 
    DataModule1.Connect(Sender);		// connect to the main server
 
    if DataModule1.MySQL56Connection1.Connected then begin
    	with DataModule1.SQLQuery1 do begin
-         DebugLn('send query');
-
-         Memo1.Append('send query');
-		   Application.ProcessMessages;
+         Action({$I %Line%}+': '+'send query');
 
          Close;
    		SQL.Text:='SELECT force_update FROM stations WHERE name='+Edit2.Text;		// check if there is a force update specs on the server
          Open;
          if (FieldByName('force_update').AsInteger > 0) then begin
-            Memo1.Append('Force Specifications Update');
-			   Application.ProcessMessages;
+            Action({$I %Line%}+': '+'Force Specifications Update');
 
             cfg.Empty();  // delete all records from the dbase table
             recordnr := 0;
@@ -486,8 +485,7 @@ begin
 
          if (Edit3.Text <> FieldByName('Checksum').AsString) then begin
 
-            Memo1.Append('Update specifications');
-   			Application.ProcessMessages;
+            Action({$I %Line%}+': '+'Update specifications');
 
             Edit3.Text := FieldByName('Checksum').AsString;		// store the new checksum
 
@@ -580,8 +578,7 @@ begin
    //Finished := true;
    if ((fs <> LastSize) OR NOT Finished) then begin
 
-      Memo1.Append('send new data to the server');
-   	Application.ProcessMessages;
+      Action({$I %Line%}+': '+'send new data to the server');
 
       Form1.Caption := 'Last Update at: '+DateTimeToStr(Now);
       Form1.Caption := intToStr(fs);
@@ -819,13 +816,18 @@ begin
    if DataModule1.MySQL56Connection1.Connected then
       DataModule1.DisConnect(Sender);	// disconnect the server
 
-   Memo1.Append('leaving update-loop');
-   Application.ProcessMessages;
-
-   if (memo1.Lines.Count > 100) then
-   	Memo1.Lines.Clear;
+   Action({$I %Line%}+': '+'leaving update-loop');
 
    Timer1.Enabled := true;
+end;
+
+
+procedure TForm1.Action(msg: string);
+begin
+  Memo1.Append(msg);
+	if (memo1.Lines.Count > 30) then
+		Memo1.Lines.Delete(0);
+	Application.ProcessMessages;
 end;
 
 // enable the update timer (after browsing)
