@@ -5,7 +5,7 @@ unit Unit2;
 interface
 
 uses
-  Classes, SysUtils, sqldb, db, mysql56conn, FileUtil, LazLoggerDummy, Forms;
+  Classes, SysUtils, sqldb, DB, mysql56conn, FileUtil, LazLoggerDummy, Forms;
 
 type
 
@@ -21,8 +21,8 @@ type
     { private declarations }
   public
     { public declarations }
-		procedure Connect(Sender: TObject);
-      procedure DisConnect(Sender: TObject);
+    procedure Connect(Sender: TObject);
+    procedure DisConnect(Sender: TObject);
   end;
 
 var
@@ -42,48 +42,49 @@ end;
 // connect to the main server
 procedure TDataModule1.Connect(Sender: TObject);
 begin
-   with Form1 do begin
-		MySQL56Connection1.HostName:=Edit1.Text;
-	   StatusBar1.Hint:=Edit1.Text;
-         DebugLn('connect()');
-		try
-			try
-   	   	MySQL56Connection1.Close;
-			 	MySQL56Connection1.Open;
-         finally
-				If MySQL56Connection1.Connected then
-					StatusBar1.SimpleText:='connected'
-            else
-               StatusBar1.SimpleText:='NOT connected'
-   		end;
-	  	except
-			StatusBar1.SimpleText:='Server not found';
-		end;
-	end;
-   Application.ProcessMessages;
+  with Form1 do
+  begin
+    MySQL56Connection1.HostName := Edit1.Text;
+    StatusBar1.Hint := Edit1.Text;
+    Form1.Action({$I %Line%}, 'connecting');
+    try
+      try
+        MySQL56Connection1.Close;
+        MySQL56Connection1.Open;
+      finally
+        if MySQL56Connection1.Connected then
+          StatusBar1.SimpleText := 'connected'
+        else
+          StatusBar1.SimpleText := 'NOT connected'
+      end;
+    except
+      StatusBar1.SimpleText := 'Server not found';
+    end;
+  end;
+  Application.ProcessMessages;
 end;
 
 // disconnect the server
 procedure TDataModule1.DisConnect(Sender: TObject);
 begin
-   with Form1 do begin
-		MySQL56Connection1.HostName:=Edit1.Text;
-	   StatusBar1.Hint:=Edit1.Text;
-		try
-			try
-   	   	MySQL56Connection1.Close;
-			finally
-				If MySQL56Connection1.Connected then
-					StatusBar1.SimpleText:='connected'
-            else
-               StatusBar1.SimpleText:='NOT connected'
-   		end;
-	  	except
-			StatusBar1.SimpleText:='Server not found';
-		end;
-	end;
-   Application.ProcessMessages;
+  with Form1 do
+  begin
+    MySQL56Connection1.HostName := Edit1.Text;
+    StatusBar1.Hint := Edit1.Text;
+    try
+      try
+        MySQL56Connection1.Close;
+      finally
+        if MySQL56Connection1.Connected then
+          StatusBar1.SimpleText := 'connected'
+        else
+          StatusBar1.SimpleText := 'NOT connected'
+      end;
+    except
+      StatusBar1.SimpleText := 'Server not found';
+    end;
+  end;
+  Application.ProcessMessages;
 end;
 
 end.
-

@@ -83,6 +83,7 @@ implementation
 
 uses Unit2;
 
+
 {$R *.lfm}
 
 
@@ -395,13 +396,14 @@ begin
   // remove the trayicon to prevent closing the program
   //   TrayIcon1.Visible:= false;
 
-  // sync the specifications with the server
-  Action({$I %Line%}, 'connecting');
+  Action({$I %Line%}, 'Enter update loop');
 
+  // sync the specifications with the server
   DataModule1.Connect(Sender);    // connect to the main server
 
   if DataModule1.MySQL56Connection1.Connected then
   begin
+    Action( {$I %Line%}, 'connected');
     with DataModule1.SQLQuery1 do
     begin
       Action( {$I %Line%}, 'send query');
@@ -693,10 +695,6 @@ begin
   end;
 
   fs := FileSize(IncludeTrailingPathDelimiter(DirectoryEdit1.Text) + 'CtData1.DBF');
-
-  //DebugLn('size database station = '+dbgs(fs));
-  //DebugLn('last size = '+dbgs(LastSize));
-  //DebugLn('Finished = '+dbgs(Finished));
 
   //Finished := true;
   if ((fs <> LastSize) or not Finished) then
